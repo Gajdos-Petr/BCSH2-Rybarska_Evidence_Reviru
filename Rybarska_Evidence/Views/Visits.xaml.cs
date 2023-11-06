@@ -1,4 +1,4 @@
-﻿using Rybarska_Evidence.ViewModel;
+﻿using Rybarska_Evidence.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,21 +11,21 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence
+namespace Rybarska_Evidence.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interakční logika pro Visits.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Visits : Window
     {
-        public MainWindow()
+        public Visits()
         {
             InitializeComponent();
-            RecordsViewModel recordsViewModel = new RecordsViewModel();
-            DataContext = recordsViewModel;
+            List<Visit> listOfVisits = new List<Visit>();
+            listOfVisits.Add(new Visit() { MemberId = 1, GroundId = 411035, SecondIdOfGround = 2, DateVisit = null, Cought = false });
+            lvVisits.ItemsSource = listOfVisits;
         }
     }
 }

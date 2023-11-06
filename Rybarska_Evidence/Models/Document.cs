@@ -13,7 +13,7 @@ namespace Rybarska_Evidence.Model
         Krajska
     }
 
-    internal class Document
+    public class Document
     {
         public DateTime License {  get; set; }
         public bool Sticker { get; set; }

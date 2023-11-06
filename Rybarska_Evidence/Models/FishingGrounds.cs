@@ -12,7 +12,7 @@ namespace Rybarska_Evidence.Models
         Mimopstruhovy
     }
 
-    class FishingGrounds
+   public class FishingGrounds
     {
         public int Number { get; set; }
         public string? Name { get; set; }

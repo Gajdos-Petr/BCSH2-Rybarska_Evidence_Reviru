@@ -1,0 +1,53 @@
+﻿<Window x:Class="Rybarska_Evidence.Views.Signpost"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rybarska_Evidence.Views"
+        mc:Ignorable="d"
+        Title="Signpost" Height="650" Width="1200">
+    <Window.Resources>
+        <Style x:Key="ButtoStyle" TargetType="Button">
+            <Setter Property="Background" Value="#2F2FA2" />
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Width" Value="230"/>
+            <Setter Property="Height" Value="300"/>
+            <Setter Property="Foreground" Value="White"/>
+        </Style>
+    </Window.Resources>
+    <Grid  >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"  />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" CornerRadius="0 0 5 0">
+            <Border CornerRadius="100" Width="155" Height="155">
+                <Ellipse Width="150" Height="150">
+                    <Ellipse.Fill>
+                        <ImageBrush Stretch="Uniform" ImageSource="../Resources/logo_svaz.png"></ImageBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+            </Border>
+        </Border>
+
+        <Grid Grid.Row="1"   >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+            <ScrollViewer HorizontalScrollBarVisibility="Auto">
+                <StackPanel  Orientation="Horizontal" HorizontalAlignment="Center" >
+                    <Button Grid.Row="0" Margin="0,0,10,0" Style="{StaticResource ResourceKey=ButtoStyle}">MEMBER INFO</Button>
+                    <Button  Grid.Row="0" FontSize="18" Style="{StaticResource ResourceKey=ButtoStyle}">VISITS</Button>
+                    <Button  Grid.Row="0" Margin="10,0,0,0" Style="{StaticResource ResourceKey=ButtoStyle}">GROUNDS</Button>
+                    <Button  Grid.Row="0" Margin="10,0,0,0" Style="{StaticResource ResourceKey=ButtoStyle}" Visibility="Visible">MEMBERS</Button>
+                
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+
+</Window>

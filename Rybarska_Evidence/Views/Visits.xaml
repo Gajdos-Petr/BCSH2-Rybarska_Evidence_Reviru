@@ -1,0 +1,36 @@
+﻿<Window x:Class="Rybarska_Evidence.Views.Visits"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rybarska_Evidence.Views"
+        mc:Ignorable="d"
+        Title="Visits" Height="450" Width="800">
+    <Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Orientation="Horizontal" Margin="0,0,0,5" >
+                <Button Width="120" >Přidat</Button>
+                <TextBox Width="150" Margin="10,0,0,0" Text="Filtr(datum)..." VerticalContentAlignment="Center" ></TextBox>
+            </StackPanel>
+            <ListView Grid.Column="0" Grid.Row="1" Width="Auto" Name="lvVisits" >
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Číslo revíru" Width="90" DisplayMemberBinding="{Binding GroundId}"/>
+                        <GridViewColumn Header="Podrevír"  Width="60" DisplayMemberBinding="{Binding SecondIdOfGround}"/>
+                        <GridViewColumn Header="Datum" Width="60"  DisplayMemberBinding="{Binding DateVisit}"/>
+                        <GridViewColumn Header="Úlovek byl" Width="70"  DisplayMemberBinding="{Binding Cought}"/>
+                        <GridViewColumn Header="Druh" Width="50"/>
+                        <GridViewColumn Header="Ks" Width="30" />
+                        <GridViewColumn Header="Cm" Width="60"/>
+                    </GridView>
+                </ListView.View>
+         
+            </ListView>
+
+        </Grid>
+    </Grid>
+</Window>

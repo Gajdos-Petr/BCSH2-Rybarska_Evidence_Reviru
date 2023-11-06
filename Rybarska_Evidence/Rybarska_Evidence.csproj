@@ -8,13 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModel\" />
-    <Folder Include="View\" />
+    <None Remove="Resources\logo_svaz.png" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="LiteDB" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\logo_svaz.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
 </Project>

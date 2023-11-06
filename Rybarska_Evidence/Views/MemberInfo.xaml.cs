@@ -1,5 +1,4 @@
-﻿using Rybarska_Evidence.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,21 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence
+namespace Rybarska_Evidence.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interakční logika pro MemberInfo.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MemberInfo : Window
     {
-        public MainWindow()
+        public MemberInfo()
         {
             InitializeComponent();
-            RecordsViewModel recordsViewModel = new RecordsViewModel();
-            DataContext = recordsViewModel;
         }
     }
 }
