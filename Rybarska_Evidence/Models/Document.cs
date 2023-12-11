@@ -8,6 +8,7 @@ namespace Rybarska_Evidence.Model
 {
     public enum PermitType
     {
+        Zadna,
         Mistni,
         Celosvazova,
         Krajska

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rybarska_Evidence.ViewModel
 {
-    class UserInfoViewModel
+  public  class MemberInformationViewModel
     {
     }
 }

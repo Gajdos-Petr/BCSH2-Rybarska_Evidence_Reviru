@@ -1,0 +1,67 @@
+﻿<Window x:Class="Rybarska_Evidence.Views.MainApp"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rybarska_Evidence.Views"
+        mc:Ignorable="d"
+        Title="MainApp" Height="650" Width="1200"
+        Background="Transparent">
+
+
+    <Border Background="#FEFFFF" CornerRadius="20">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+            </Grid.RowDefinitions>
+
+            <!--LEFT MENU BAR-->
+            <Border Grid.Row="1" Grid.Column="0" Background="#3AAFA9" CornerRadius="20,0,0,20">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="200"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <!--LOGO-->
+                    <Border Height="150">
+                        <Rectangle >
+                            <Rectangle.Fill>
+                                <ImageBrush Stretch="Uniform" ImageSource="../Resources/logo_svaz.png"></ImageBrush>
+                            </Rectangle.Fill>
+                        </Rectangle>
+                    </Border>
+                    <!--MENU BUTTONS-->
+                    <StackPanel Grid.Row="1" Margin="0,30,0,0"  >
+                        <RadioButton Content="DOMŮ" Style="{StaticResource MenuButtonRes}" IsChecked="True" Command="{Binding HomeViewCommand}"/>
+                        <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
+                        <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
+                        <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />
+
+                    </StackPanel>
+
+                </Grid>
+            </Border>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="5*"/>
+                    <RowDefinition Height="70*"/>
+                </Grid.RowDefinitions>
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                    <Button Width="80" Content="MIN"/>
+                    <Button Width="80" Content="MAX"/>
+                    <Button Width="80" Content="CLOSE"/>
+
+                </StackPanel>
+                <ContentControl Grid.Row="1" Margin="20" Content="{Binding CurrentView}" />
+
+            </Grid>
+        </Grid>
+    </Border>
+
+
+  
+</Window>

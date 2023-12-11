@@ -1,4 +1,5 @@
 ﻿using Rybarska_Evidence.ViewModel;
+using Rybarska_Evidence.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace Rybarska_Evidence
         public MainWindow()
         {
             InitializeComponent();
-            RecordsViewModel recordsViewModel = new RecordsViewModel();
+            MainApp recordsViewModel = new MainApp();
             DataContext = recordsViewModel;
         }
     }

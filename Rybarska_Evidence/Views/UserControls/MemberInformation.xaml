@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="Rybarska_Evidence.Views.UserControls.MemberInformation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Rybarska_Evidence.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="550" d:DesignWidth="800">
+    <Grid Background="White" >
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="ÚDAJE ČLENA" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
+            <!--LEFT JMENO, DATUM NAROZENI-->
+            <Border Grid.Row="1" CornerRadius="10" Background="#3B8BEB" Margin="10" >
+                <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                    <TextBlock Text="Jméno Příjmení" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                    <TextBlock Text="Datum narození" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+            <!--LEFT POZICE-->
+            <Border Grid.Row="2" CornerRadius="10" Background="#86C232" Margin="10" >
+                <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+                    <TextBlock Text="Pozice" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Column="1" Margin="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="DOKUMENTY ČLENA" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--RIGHT LISTEK-->
+                <Border Grid.Row="0" CornerRadius="10" Background="#17252A" Margin="10" >
+                    <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="LÍSTEK" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <!--LEFT ZNAMKA-->
+                <Border Grid.Row="1" CornerRadius="10" Background="#17252A" Margin="10" >
+                    <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="ZNÁMKA" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+                <!--LEFT POVOLENKA-->
+                <Border Grid.Row="2" CornerRadius="10" Background="#17252A" Margin="10" >
+                    <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <TextBlock Text="POVOLENKA" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

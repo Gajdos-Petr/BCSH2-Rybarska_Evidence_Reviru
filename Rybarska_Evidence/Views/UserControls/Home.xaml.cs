@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence.Views
+namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Signpost.xaml
+    /// Interakční logika pro Home.xaml
     /// </summary>
-    public partial class Signpost : Window
+    public partial class Home : UserControl
     {
-        public Signpost()
+        public Home()
         {
             InitializeComponent();
         }

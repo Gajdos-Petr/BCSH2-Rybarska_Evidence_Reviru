@@ -15,35 +15,17 @@ namespace Rybarska_Evidence.Model
     }
     internal class Member
     {
-    public int MemberId { get; set; }
-    public string FistName { get; set; }
+        public int MemberId { get; set; }
+        public string FistName { get; set; }
 
-    public string LastName {  get; set; }
-   
-    public DateTime dateOfBirth { get; set; }
+        public string LastName { get; set; }
 
-    public MemberType MemberType { get; set;}
+        public DateTime DateOfBirth { get; set; }
 
-    public Document  Document { get; set; }
+        public MemberType MemberType { get; set; }
 
-
-
-    public void InsterMemberIntoDatabase(Member memberToInsert)
-        {
-
-        }
+        public Document Document { get; set; }
 
 
-
-    public Member? LoadMemberFromDatabase(string FistName, string LastName)
-        {
-            return null;
-        }
-
-
-    public List<Member> LoadMembersFromDatabase()
-        {
-            return new List<Member>();
-        }
     }
 }

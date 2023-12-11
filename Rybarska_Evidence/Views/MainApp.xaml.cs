@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rybarska_Evidence.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +16,15 @@ using System.Windows.Shapes;
 namespace Rybarska_Evidence.Views
 {
     /// <summary>
-    /// Interakční logika pro MemberInfo.xaml
+    /// Interakční logika pro MainApp.xaml
     /// </summary>
-    public partial class MemberInfo : Window
+    public partial class MainApp : Window
     {
-        public MemberInfo()
+        public MainApp()
         {
             InitializeComponent();
+            MainViewModel mainViewModel = new MainViewModel();
+            DataContext = mainViewModel;
         }
     }
 }
