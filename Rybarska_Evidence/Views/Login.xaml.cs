@@ -1,5 +1,4 @@
-﻿using Rybarska_Evidence.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence.Views
+namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Visits.xaml
+    /// Interakční logika pro Login.xaml
     /// </summary>
-    public partial class Visits : Window
+    public partial class Login : Window
     {
-        public Visits()
+        public Login()
         {
             InitializeComponent();
-            List<Visit> listOfVisits = new List<Visit>();
-            listOfVisits.Add(new Visit() { MemberId = 1, GroundId = 411035, SecondIdOfGround = 2, DateVisit = null, Cought = false });
-            lvVisits.ItemsSource = listOfVisits;
         }
     }
 }

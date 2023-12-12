@@ -21,15 +21,19 @@
             <!--LEFT JMENO, DATUM NAROZENI-->
             <Border Grid.Row="1" CornerRadius="10" Background="#3B8BEB" Margin="10" >
                 <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Jméno Příjmení" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
-                    <TextBlock Text="Datum narození" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding CurrentLogedMember.FirstName}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentLogedMember.LastName}" FontFamily="Bahnschrift" Foreground="White" Margin="5,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+
+                    </StackPanel>
+                    <TextBlock Text="{Binding CurrentLogedMember.FormattedDateOfBirth}" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                 </StackPanel>
             </Border>
             <!--LEFT POZICE-->
             <Border Grid.Row="2" CornerRadius="10" Background="#86C232" Margin="10" >
                 <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-                    <TextBlock Text="Pozice" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36"/>
+                    <TextBlock Text="{Binding CurrentLogedMember.MemberType}" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36"/>
                 </StackPanel>
             </Border>
         </Grid>
@@ -49,19 +53,19 @@
                 <!--RIGHT LISTEK-->
                 <Border Grid.Row="0" CornerRadius="10" Background="#17252A" Margin="10" >
                     <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="LÍSTEK" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentLogedMember.Document.FormattedDateOfLicense}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
                 <!--LEFT ZNAMKA-->
                 <Border Grid.Row="1" CornerRadius="10" Background="#17252A" Margin="10" >
                     <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="ZNÁMKA" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentLogedMember.Document.StickerText}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
                 <!--LEFT POVOLENKA-->
                 <Border Grid.Row="2" CornerRadius="10" Background="#17252A" Margin="10" >
                     <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                        <TextBlock Text="POVOLENKA" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding CurrentLogedMember.Document.TypeOfPermit}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                     </StackPanel>
                 </Border>
             </Grid>

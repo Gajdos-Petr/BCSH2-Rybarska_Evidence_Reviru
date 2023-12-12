@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,18 +16,54 @@ namespace Rybarska_Evidence.Model
         Krajska
     }
 
-    public class Document
+    public class Document : ObservableObject
     {
-        public DateTime License {  get; set; }
-        public bool Sticker { get; set; }
+
+        private bool sticker;
+        private DateTime license;
+        
+        public DateTime License {  
+            get
+            {
+                return license;
+            }
+            
+            set
+            {
+                SetProperty(ref license, value);
+                OnPropertyChanged(nameof(FormattedDateOfLicense));
+
+            }
+        
+        }
+        public bool Sticker {
+            get
+            {
+                return sticker;
+            }
+            
+            set
+            {
+                SetProperty(ref sticker, value);
+                OnPropertyChanged(nameof(StickerText));
+            }
+                
+                }
         public PermitType TypeOfPermit { get; set; }
 
 
 
+        public string StickerText
+        {
+            get { return Sticker ? "Zakoupena" : "Nezakoupena"; }
+        }
 
 
+        public string FormattedDateOfLicense
+        {
+            get { return License.ToString("dd.MM.yyyy"); }
+        }
 
 
-        
     }
 }
