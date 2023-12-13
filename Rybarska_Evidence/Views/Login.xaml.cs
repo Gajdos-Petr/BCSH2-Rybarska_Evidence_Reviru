@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rybarska_Evidence.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,9 @@ namespace Rybarska_Evidence.Views.UserControls
         public Login()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            LoginViewModel loginViewModel = new LoginViewModel();
+            DataContext = loginViewModel;
         }
     }
 }

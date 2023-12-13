@@ -21,7 +21,7 @@ namespace Rybarska_Evidence.ViewModel
                 FirstName = "Kamil",
                 LastName = "Vocas",
                 DateOfBirth = new DateTime(1999, 10, 12),
-                MemberType = MemberType.Regular,
+                MemberType = MemberType.Vedeni,
                 Document = new Document
                 {
                     License = new DateTime(),

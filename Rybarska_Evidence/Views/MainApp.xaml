@@ -30,11 +30,7 @@
 
                     <!--LOGO-->
                     <Border Height="150">
-                        <Rectangle >
-                            <Rectangle.Fill>
-                                <ImageBrush Stretch="Uniform" ImageSource="../Resources/logo_svaz.png"></ImageBrush>
-                            </Rectangle.Fill>
-                        </Rectangle>
+                        <Image Source="../Resources/logo_svaz.png" Stretch="Uniform" />
                     </Border>
                     <!--MENU BUTTONS-->
                     <StackPanel Grid.Row="1" Margin="0,30,0,0"  >
@@ -43,6 +39,8 @@
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />
                         <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="PŘIDAT ČLENA" Style="{StaticResource MenuButtonRes}"  />
+                        <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="PŘIDAT REVÍR" Style="{StaticResource MenuButtonRes}"  />
+
 
                     </StackPanel>
 

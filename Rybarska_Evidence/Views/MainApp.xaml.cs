@@ -23,6 +23,8 @@ namespace Rybarska_Evidence.Views
         public MainApp()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             MainViewModel mainViewModel = new MainViewModel();
             DataContext = mainViewModel;
         }

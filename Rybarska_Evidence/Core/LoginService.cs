@@ -1,0 +1,45 @@
+﻿using Rybarska_Evidence.Model;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Rybarska_Evidence.Core
+{
+   public sealed class LoginService
+    {
+
+        private static LoginService instance;
+        private Member currentLogedMember;
+
+
+        public static LoginService Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new LoginService();
+                }
+                return instance;
+            }
+        }
+
+        public Member CurrentLogedMember
+        {
+            get { return currentLogedMember; }
+            set
+            {
+                if (currentLogedMember != value)
+                {
+                    currentLogedMember = value;
+                    OnCurrentLogedMemberChanged?.Invoke(this, EventArgs.Empty);
+                }
+            }
+        }
+
+        public event EventHandler OnCurrentLogedMemberChanged;
+
+    }
+}

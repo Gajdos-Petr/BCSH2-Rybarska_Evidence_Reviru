@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Rybarska_Evidence.Core;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Rybarska_Evidence.Model
             
             set
             {
-                SetProperty(ref license, value);
+                //SetProperty(ref license, value);
                 OnPropertyChanged(nameof(FormattedDateOfLicense));
 
             }
@@ -44,7 +44,7 @@ namespace Rybarska_Evidence.Model
             
             set
             {
-                SetProperty(ref sticker, value);
+                //SetProperty(ref sticker, value);
                 OnPropertyChanged(nameof(StickerText));
             }
                 

@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Rybarska_Evidence.Core;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,14 +10,15 @@ namespace Rybarska_Evidence.Model
 {
     public enum MemberType
     {
-        Regular,
-        Admin
+        Clen,
+        Vedeni
 
     }
     public class Member : ObservableObject
     {
 
         private DateTime birthDay;
+
         public int MemberId { get; set; }
         public string FirstName { get; set; }
 
@@ -30,7 +31,7 @@ namespace Rybarska_Evidence.Model
             }
             set
             {
-                SetProperty(ref birthDay, value);
+                //SetProperty(ref birthDay, value);
                 OnPropertyChanged(nameof(FormattedDateOfBirth));
             }
         

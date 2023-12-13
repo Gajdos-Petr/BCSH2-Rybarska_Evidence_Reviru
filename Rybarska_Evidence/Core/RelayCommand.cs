@@ -7,43 +7,51 @@ using System.Windows.Input;
 
 namespace Rybarska_Evidence.Core
 {
-    public class RelayCommand : ICommand
+    public  class RelayCommand : ICommand
     {
-        public event EventHandler? CanExecuteChanged
+        Action _TargetExecuteMethod;
+        Func<bool> _TargetCanExecuteMethod;
+
+        public RelayCommand(Action executeMethod)
         {
-            add
-            {
-                CommandManager.RequerySuggested += value;
-            }
-            remove
-            {
-                CommandManager.RequerySuggested -= value;
-            }
+            _TargetExecuteMethod = executeMethod;
         }
 
-        Action<object> _execute;
-        Func<object, bool> _canExecute;
-
-        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
+        public RelayCommand(Action executeMethod, Func<bool> canExecuteMethod)
         {
-            _execute = execute;
-            _canExecute = canExecute;
+            _TargetExecuteMethod = executeMethod;
+            _TargetCanExecuteMethod = canExecuteMethod;
         }
 
-        public bool CanExecute(object? parameter)
+        public void RaiseCanExecuteChanged()
         {
-            if (_canExecute != null)
+            CanExecuteChanged(this, EventArgs.Empty);
+        }
+
+        bool ICommand.CanExecute(object parameter)
+        {
+
+            if (_TargetCanExecuteMethod != null)
             {
-                return _canExecute(parameter);
-            }else 
-            { 
-                return false;
+                return _TargetCanExecuteMethod();
             }
+
+            if (_TargetExecuteMethod != null)
+            {
+                return true;
+            }
+
+            return false;
         }
 
-        public void Execute(object? parameter)
+        public event EventHandler CanExecuteChanged = delegate { };
+
+        void ICommand.Execute(object parameter)
         {
-          _execute(parameter);
+            if (_TargetExecuteMethod != null)
+            {
+                _TargetExecuteMethod();
+            }
         }
     }
 }

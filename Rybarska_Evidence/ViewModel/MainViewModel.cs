@@ -1,5 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿
+using Rybarska_Evidence.Core;
 using Rybarska_Evidence.Model;
 using System;
 using System.Collections.Generic;
@@ -66,7 +66,7 @@ namespace Rybarska_Evidence.ViewModel
 
         public Visibility AdminButtonsVisibility
         {
-            get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Admin ? Visibility.Visible : Visibility.Collapsed; }
+            get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
         }
     }
 }
