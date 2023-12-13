@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:Rybarska_Evidence.ViewModel"
              xmlns:view="clr-namespace:Rybarska_Evidence.Views"
              xmlns:userControl="clr-namespace:Rybarska_Evidence.Views.UserControls"
-             StartupUri="Views/MainApp.xaml">
+             StartupUri="Views/Login.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

@@ -8,16 +8,21 @@ using System.Threading.Tasks;
 
 namespace Rybarska_Evidence.Db
 {
-  public  class Database
+  public class Database
     {
+
         private readonly LiteDatabase db;
 
         public Database()
         {
-            string dbPath = "myDatabase.db";
-            db = new LiteDatabase(dbPath);
+            db = new LiteDatabase(@"MyData.db");
         }
 
-        public LiteCollection<Member> People => (LiteCollection<Member>)db.GetCollection<Member>("member");
+        public LiteDatabase GetDatabaseInstance()
+        {
+            return db;
+        }
+
+
     }
 }

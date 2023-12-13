@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,10 +32,19 @@ namespace Rybarska_Evidence.Model
             }
             set
             {
-                //SetProperty(ref birthDay, value);
+                SetProperty(ref birthDay, value);
                 OnPropertyChanged(nameof(FormattedDateOfBirth));
             }
         
+        }
+
+        private void SetProperty(ref DateTime property, DateTime value, [CallerMemberName] string propertyName = null)
+        {
+            if (property != value)
+            {
+                property = value;
+                OnPropertyChanged(propertyName);
+            }
         }
 
         public MemberType MemberType { get; set; }

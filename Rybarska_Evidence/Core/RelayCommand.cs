@@ -7,51 +7,51 @@ using System.Windows.Input;
 
 namespace Rybarska_Evidence.Core
 {
-    public  class RelayCommand : ICommand
+    public class RelayCommand : ICommand
     {
-        Action _TargetExecuteMethod;
-        Func<bool> _TargetCanExecuteMethod;
+        private Action<object> _execute;
 
-        public RelayCommand(Action executeMethod)
+        private Func<object, bool> _canExecute;
+
+        public event EventHandler? CanExecuteChanged
         {
-            _TargetExecuteMethod = executeMethod;
-        }
-
-        public RelayCommand(Action executeMethod, Func<bool> canExecuteMethod)
-        {
-            _TargetExecuteMethod = executeMethod;
-            _TargetCanExecuteMethod = canExecuteMethod;
-        }
-
-        public void RaiseCanExecuteChanged()
-        {
-            CanExecuteChanged(this, EventArgs.Empty);
-        }
-
-        bool ICommand.CanExecute(object parameter)
-        {
-
-            if (_TargetCanExecuteMethod != null)
+            add
             {
-                return _TargetCanExecuteMethod();
+                CommandManager.RequerySuggested += value;
             }
-
-            if (_TargetExecuteMethod != null)
+            remove
             {
-                return true;
+                CommandManager.RequerySuggested -= value;
             }
-
-            return false;
         }
 
-        public event EventHandler CanExecuteChanged = delegate { };
 
-        void ICommand.Execute(object parameter)
+  
+
+        public RelayCommand(Action<object> execute, Func<object, bool> canExecute)
         {
-            if (_TargetExecuteMethod != null)
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+      
+
+        public bool CanExecute(object? parameter)
+        {
+            if (_canExecute != null)
             {
-                _TargetExecuteMethod();
+                return _canExecute(parameter);
             }
+            else
+            {
+                return false;
+            }
+            //return _canExecute == null || _canExecute(parameter);
+        }
+
+        public void Execute(object? parameter)
+        {
+          _execute(parameter);
         }
     }
 }

@@ -46,20 +46,21 @@ namespace Rybarska_Evidence.ViewModel
 
             CurrentView = HomeVM;
 
-            HomeViewCommand = new RelayCommand(delegate
+            HomeViewCommand = new RelayCommand(o =>
             {
                 CurrentView = HomeVM;
-            });
+            }, _ => true);
 
-            MemberInformationViewCommand = new RelayCommand(delegate
+            MemberInformationViewCommand = new RelayCommand( o =>
             {
                 CurrentView = MemberInformationVM;
-            });
+              
+            }, _ => true);
 
-            GroundsViewCommand = new RelayCommand(delegate
+            GroundsViewCommand = new RelayCommand(o =>
             {
                 CurrentView = GroundsVM;
-            });
+            }, _ => true);
 
 
         }

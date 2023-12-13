@@ -16,7 +16,15 @@ namespace Rybarska_Evidence.Models
     {
         public int UserID { get; set; }
         public string Password { get; set; }
-    
-       // public LoginType LoginType { get; set; }
+
+        public override string? ToString()
+        {
+            return UserID.ToString() + " " + Password;
+        }
+
+        // public LoginType LoginType { get; set; }
+
+
+
     }
 }
