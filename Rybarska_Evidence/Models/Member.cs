@@ -11,8 +11,7 @@ namespace Rybarska_Evidence.Model
     public enum MemberType
     {
         Regular,
-        Chairman,
-        Leader
+        Admin
 
     }
     public class Member : ObservableObject

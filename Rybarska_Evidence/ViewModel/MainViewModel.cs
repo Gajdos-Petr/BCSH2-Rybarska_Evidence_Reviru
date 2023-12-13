@@ -1,10 +1,12 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Rybarska_Evidence.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Rybarska_Evidence.ViewModel
 {
@@ -60,6 +62,11 @@ namespace Rybarska_Evidence.ViewModel
             });
 
 
+        }
+
+        public Visibility AdminButtonsVisibility
+        {
+            get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Admin ? Visibility.Visible : Visibility.Collapsed; }
         }
     }
 }

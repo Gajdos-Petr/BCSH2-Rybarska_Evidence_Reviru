@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Rybarska_Evidence.Views.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="850">
     <Grid Background="Transparent" >
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
@@ -15,17 +15,16 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
             <Button Height="30" Width="90" Content="+ PŘIDAT"/>
         </StackPanel >
-        <ListView Grid.Row="1" Name="MemberList" Margin="10">
+        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="50"/>
-                    <GridViewColumn Header="Jméno" Width="110"/>
-                    <GridViewColumn Header="Příjmení" Width="120"/>
-                    <GridViewColumn Header="Datum narození" Width="110"/>
-                    <GridViewColumn Header="Pozice" Width="80"/>
-                    <GridViewColumn Header="Platnost lístku" Width="100"/>
-                    <GridViewColumn Header="Známka" Width="100"/>
-                    <GridViewColumn Header="Typ povolenky" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Number}" Header="Číslo" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Název" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding PositionNumber}" Header="Podrevír" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding PositionName}" Header="Nazev podrevír" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding GeoundsType}" Header="Typ" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Size}" Header="Velikost lístku" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Popis" Width="200"/>
                     
                 </GridView>
             </ListView.View>

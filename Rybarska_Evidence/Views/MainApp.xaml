@@ -6,7 +6,9 @@
         xmlns:local="clr-namespace:Rybarska_Evidence.Views"
         mc:Ignorable="d"
         Title="MainApp" Height="650" Width="1200"
-        Background="Transparent">
+        Background="Transparent" ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True">
 
 
     <Border Background="#FEFFFF" CornerRadius="20">
@@ -40,25 +42,30 @@
                         <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />
+                        <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="PŘIDAT ČLENA" Style="{StaticResource MenuButtonRes}"  />
 
                     </StackPanel>
 
                 </Grid>
             </Border>
+      
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="70*"/>
                 </Grid.RowDefinitions>
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" >
+                <Border Background="#3AAFA9">
+                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Width="80" Content="MIN"/>
                     <Button Width="80" Content="MAX"/>
-                    <Button Width="80" Content="CLOSE"/>
+                    <Button Name="btnCloseMainWindow" Width="80" Content="CLOSE" Click="btnCloseMainWindow_Click"/>
 
                 </StackPanel>
-                <ContentControl Grid.Row="1" Margin="20" Content="{Binding CurrentView}" />
+                </Border>
+                    <ContentControl Grid.Row="1" Margin="20" Content="{Binding CurrentView}" />
 
             </Grid>
+         
         </Grid>
     </Border>
 

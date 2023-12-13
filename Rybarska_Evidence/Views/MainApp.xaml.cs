@@ -26,5 +26,10 @@ namespace Rybarska_Evidence.Views
             MainViewModel mainViewModel = new MainViewModel();
             DataContext = mainViewModel;
         }
+
+        private void btnCloseMainWindow_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }
