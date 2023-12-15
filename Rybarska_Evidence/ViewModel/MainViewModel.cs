@@ -12,7 +12,7 @@ namespace Rybarska_Evidence.ViewModel
 {
    public class MainViewModel : ObservableObject
     {
-        public RelayCommand HomeViewCommand { get; set; }
+        //public RelayCommand HomeViewCommand { get; set; }
         public RelayCommand GroundsViewCommand { get; set; }
 
         public RelayCommand MembersViewCommand { get; set; }
@@ -20,7 +20,7 @@ namespace Rybarska_Evidence.ViewModel
         public RelayCommand MemberInformationViewCommand { get; set; }
 
 
-        public HomeViewModel HomeVM { get; set; }
+        //public HomeViewModel HomeVM { get; set; }
 
 
         public GroundsViewModel GroundsVM { get; set; }
@@ -45,18 +45,18 @@ namespace Rybarska_Evidence.ViewModel
 
         public MainViewModel()
         {
-            HomeVM = new HomeViewModel();
+            //HomeVM = new HomeViewModel();
            
             MemberInformationVM = new MemberInformationViewModel();
 
 
 
-            CurrentView = HomeVM;
+            CurrentView = MemberInformationVM;
 
-            HomeViewCommand = new RelayCommand(o =>
-            {
-                CurrentView = HomeVM;
-            }, _ => true);
+            //HomeViewCommand = new RelayCommand(o =>
+            //{
+            //    CurrentView = HomeVM;
+            //}, _ => true);
 
             MemberInformationViewCommand = new RelayCommand( o =>
             {

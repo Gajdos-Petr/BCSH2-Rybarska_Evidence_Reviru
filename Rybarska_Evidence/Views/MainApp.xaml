@@ -34,7 +34,7 @@
                     </Border>
                     <!--MENU BUTTONS-->
                     <StackPanel Grid.Row="1" Margin="0,30,0,0"  >
-                        <RadioButton Content="DOMŮ" Style="{StaticResource MenuButtonRes}" IsChecked="True" Command="{Binding HomeViewCommand}"/>
+                        <!--<RadioButton Content="DOMŮ" Style="{StaticResource MenuButtonRes}" IsChecked="True" Command="{Binding HomeViewCommand}"/>-->
                         <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />

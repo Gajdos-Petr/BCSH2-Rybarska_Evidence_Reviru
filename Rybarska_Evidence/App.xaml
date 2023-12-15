@@ -12,9 +12,9 @@
                 <ResourceDictionary Source="Resources/MenuButtonRes.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
-            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+            <!--<DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
                 <userControl:Home/>
-            </DataTemplate>
+            </DataTemplate>-->
 
 
             <DataTemplate DataType="{x:Type viewModel:MemberInformationViewModel}">

@@ -20,9 +20,7 @@ namespace Rybarska_Evidence.Db
             string _BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
 
             db = new LiteDatabase(Path.GetFullPath(Path.Combine(_BaseDirectory, @"..\..\..\..\Db\FishingData.db")));
-          //  string databasePath = Path.Combine("Data", "FishingData.db");
-
-         //   db = new LiteDatabase(databasePath));
+      
             collection = db.GetCollection<T>(collectionName);
         }
   
@@ -43,33 +41,47 @@ namespace Rybarska_Evidence.Db
             }
         }
 
-        
+        public void UpdateItemInDatabase(T item)
+        {
+            collection.Update(item);
+        }
+
+        public void DeleteItemInDatabase(T item)
+        {
+            using (db)
+            {
+              //  collection.Delete(item);
+            }
+        }
 
 
 
-        //public bool IsInDatabase(T item)
-        //{
-        //    var idProperty = typeof(T).GetProperty("Id"); // Nastavte název vlastnosti identifikátoru
-        //    if (idProperty == null)
-        //    {
-        //        throw new ArgumentException("Třída musí mít vlastnost 'Id'.");
-        //    }
+        public bool IsInDatabase(T item)
+        {
+            using (db)
+            {
+                var idProperty = typeof(T).GetProperty("LoginIdentifier"); // Nastavte název vlastnosti identifikátoru
+                if (idProperty == null)
+                {
+                    throw new ArgumentException("Třída musí mít vlastnost 'Id'.");
+                }
 
-        //    var itemId = idProperty.GetValue(item, null);
+                var itemId = idProperty.GetValue(item, null);
 
-        //    if (itemId == null)
-        //    {
-        //        return false; // Pokud Id je null, nemůže být v databázi
-        //    }
+                if (itemId == null)
+                {
+                    return false; // Pokud Id je null, nemůže být v databázi
+                }
 
-        //    return true;
-        //}
+                return true;
+            }
+        }
 
         //public void Add(T item)
         //{
         //    collection.Insert(item);
         //}
 
-   
+
     }
 }
