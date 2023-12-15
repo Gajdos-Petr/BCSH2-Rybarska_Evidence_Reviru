@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,10 +17,15 @@ namespace Rybarska_Evidence.Db
 
         public DatabaseManager(string collectionName)
         {
-            db = new LiteDatabase("Database/FishingData.db");
+            string _BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            db = new LiteDatabase(Path.GetFullPath(Path.Combine(_BaseDirectory, @"..\..\..\..\Db\FishingData.db")));
+          //  string databasePath = Path.Combine("Data", "FishingData.db");
+
+         //   db = new LiteDatabase(databasePath));
             collection = db.GetCollection<T>(collectionName);
         }
-
+  
 
         public ObservableCollection<T> LoadData()
         {
