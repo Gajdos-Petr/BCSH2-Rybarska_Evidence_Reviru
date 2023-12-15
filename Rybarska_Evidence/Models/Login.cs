@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rybarska_Evidence.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,14 +13,35 @@ namespace Rybarska_Evidence.Models
         Admin
     }
 
-    public class Login
+    public class Login : ObservableObject
     {
-        public int UserID { get; set; }
-        public string Password { get; set; }
+
+        private int id;
+        private string password;
+
+        public int LoginIdentifier
+        {
+            get { return id; }
+            set
+            {
+                id = value;
+                OnPropertyChanged(nameof(id));
+            }
+        }
+
+        public string Password
+        {
+            get { return password; }
+            set
+            {
+                password = value;
+                OnPropertyChanged(nameof(Password));
+            }
+        }
 
         public override string? ToString()
         {
-            return UserID.ToString() + " " + Password;
+            return LoginIdentifier.ToString() + " " + Password;
         }
 
         // public LoginType LoginType { get; set; }

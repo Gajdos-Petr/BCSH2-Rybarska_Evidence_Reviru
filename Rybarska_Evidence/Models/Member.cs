@@ -33,7 +33,7 @@ namespace Rybarska_Evidence.Model
             set
             {
                 SetProperty(ref birthDay, value);
-                OnPropertyChanged(nameof(FormattedDateOfBirth));
+                OnPropertyChanged(nameof(birthDay));
             }
         
         }

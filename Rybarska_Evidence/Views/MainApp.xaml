@@ -38,8 +38,7 @@
                         <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />
-                        <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="PŘIDAT ČLENA" Style="{StaticResource MenuButtonRes}"  />
-                        <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="PŘIDAT REVÍR" Style="{StaticResource MenuButtonRes}"  />
+                        <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="ČLENOVÉ" Style="{StaticResource MenuButtonRes}"  Command="{Binding MembersViewCommand}" />
 
 
                     </StackPanel>

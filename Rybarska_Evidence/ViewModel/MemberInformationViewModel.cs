@@ -20,11 +20,11 @@ namespace Rybarska_Evidence.ViewModel
                 MemberId = 1,
                 FirstName = "Kamil",
                 LastName = "Vocas",
-                DateOfBirth = new DateTime(1999, 10, 12),
+                DateOfBirth = DateTime.Now,
                 MemberType = MemberType.Vedeni,
                 Document = new Document
                 {
-                    License = new DateTime(),
+                    License = DateTime.Now,
                     Sticker = false,
                     TypeOfPermit = PermitType.Mistni
                 }

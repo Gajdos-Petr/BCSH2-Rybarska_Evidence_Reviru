@@ -17,14 +17,15 @@ using System.Windows.Shapes;
 namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Grounds.xaml
+    /// Interakční logika pro Members.xaml
     /// </summary>
-    public partial class Grounds : UserControl
+    public partial class Members : UserControl
     {
-        public Grounds()
+        public Members()
         {
             InitializeComponent();
-            DataContext = new GroundsViewModel();
+            MembersViewModel membersViewModel = new MembersViewModel();
+            DataContext = membersViewModel;
         }
     }
 }

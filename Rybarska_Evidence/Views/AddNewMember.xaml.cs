@@ -11,20 +11,20 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Grounds.xaml
+    /// Interakční logika pro AddNewMember.xaml
     /// </summary>
-    public partial class Grounds : UserControl
+    public partial class AddNewMember : Window
     {
-        public Grounds()
+        public AddNewMember()
         {
             InitializeComponent();
-            DataContext = new GroundsViewModel();
+            AddNewMemberViewModel addNewMemberViewModel = new AddNewMemberViewModel();
+            DataContext = addNewMemberViewModel;
         }
     }
 }

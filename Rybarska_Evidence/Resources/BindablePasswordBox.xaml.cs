@@ -1,5 +1,4 @@
-﻿using Rybarska_Evidence.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,17 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence.Views.UserControls
+namespace Rybarska_Evidence.Resources
 {
     /// <summary>
-    /// Interakční logika pro Grounds.xaml
+    /// Interakční logika pro BindablePasswordBox.xaml
     /// </summary>
-    public partial class Grounds : UserControl
+    public partial class BindablePasswordBox : UserControl
     {
-        public Grounds()
+        public BindablePasswordBox()
         {
             InitializeComponent();
-            DataContext = new GroundsViewModel();
+        }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

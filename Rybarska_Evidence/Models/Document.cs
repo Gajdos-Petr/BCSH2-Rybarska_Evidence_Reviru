@@ -21,7 +21,8 @@ namespace Rybarska_Evidence.Model
 
         private bool sticker;
         private DateTime license;
-        
+        private PermitType permit;
+
         public DateTime License {  
             get
             {
@@ -31,7 +32,7 @@ namespace Rybarska_Evidence.Model
             set
             {
                 //SetProperty(ref license, value);
-                OnPropertyChanged(nameof(FormattedDateOfLicense));
+                OnPropertyChanged(nameof(license));
 
             }
         
@@ -49,8 +50,20 @@ namespace Rybarska_Evidence.Model
             }
                 
                 }
-        public PermitType TypeOfPermit { get; set; }
+        public PermitType TypeOfPermit
+        {
+            get
+            {
+                return permit;
+            }
 
+            set
+            {
+                //SetProperty(ref sticker, value);
+                permit = value;
+                OnPropertyChanged(nameof(permit));
+            }
+        }
 
 
         public string StickerText

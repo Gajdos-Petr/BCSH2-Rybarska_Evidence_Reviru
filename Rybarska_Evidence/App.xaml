@@ -5,7 +5,7 @@
              xmlns:viewModel="clr-namespace:Rybarska_Evidence.ViewModel"
              xmlns:view="clr-namespace:Rybarska_Evidence.Views"
              xmlns:userControl="clr-namespace:Rybarska_Evidence.Views.UserControls"
-             StartupUri="Views/Login.xaml">
+             StartupUri="Views/MainApp.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -24,6 +24,13 @@
             <DataTemplate DataType="{x:Type viewModel:GroundsViewModel}">
                 <userControl:Grounds/>
             </DataTemplate>
+
+
+            <DataTemplate DataType="{x:Type viewModel:MembersViewModel}">
+                <userControl:Members/>
+            </DataTemplate>
+            
+            
         </ResourceDictionary>
         
     
