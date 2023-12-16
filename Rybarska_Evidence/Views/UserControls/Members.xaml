@@ -13,16 +13,20 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <Button Height="30" Width="120" Content="+ PŘIDAT ČLENA" Command="{Binding ShowAddWindowCommand}"/>
+            <Button Height="30" Width="120" Content=" PŘIDAT ČLENA" Command="{Binding ShowAddWindowCommand}"/>
+            <Button Height="30" Width="120" Content=" ODEBRAT ČLENA" Command="{Binding RemoveMemberCommand}" Margin="10,0,10,0"/>
+            <Button Height="30" Width="120" Content=" UPRAVIT ČLENA" Command="{Binding ShowAddWindowCommand}"/>
+
         </StackPanel >
-        <ListView Grid.Row="1" Name="MemberList" Margin="10"  ItemsSource="{Binding Members}">
+        <ListView Grid.Row="1" Name="MemberList" Margin="10"  ItemsSource="{Binding Members}"  SelectedValue="{Binding SelectedMember}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding MemberId}" Header="Id" Width="30"/>
                     <GridViewColumn DisplayMemberBinding="{Binding FirstName}" Header="Jméno" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding LastName}" Header="Příjmení" Width="100"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth}" Header="Datum narození" Width="110"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Document.License}" Header="Plastnost lístku" Width="100"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding DateOfBirth, StringFormat='dd.MM.yyyy'}" Header="Datum narození" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding MemberType}" Header="Pozice" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Document.License, StringFormat='dd.MM.yyyy'}" Header="Plastnost lístku" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Document.Sticker}" Header="Známka" Width="100"/>
                     <GridViewColumn DisplayMemberBinding="{Binding Document.TypeOfPermit}" Header="Povolenka" Width="100"/>
 

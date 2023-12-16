@@ -15,7 +15,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <Button Height="30" Width="90" Content="+ PŘIDAT" Command="{Binding ShowAddWindowCommand}"/>
+            <Button Visibility="{Binding AdminButtonsVisibility}" Height="30" Width="90" Content="+ PŘIDAT" Command="{Binding ShowAddWindowCommand}"/>
         </StackPanel >
         <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}">
             <ListView.View>

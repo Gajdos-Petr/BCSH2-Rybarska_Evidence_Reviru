@@ -23,8 +23,15 @@ namespace Rybarska_Evidence.Views.UserControls
         public AddNewMember()
         {
             InitializeComponent();
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
             AddNewMemberViewModel addNewMemberViewModel = new AddNewMemberViewModel();
             DataContext = addNewMemberViewModel;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

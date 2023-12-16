@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,7 +32,7 @@ namespace Rybarska_Evidence.Model
             
             set
             {
-                //SetProperty(ref license, value);
+                SetProperty(ref license, value);
                 OnPropertyChanged(nameof(license));
 
             }
@@ -65,7 +66,14 @@ namespace Rybarska_Evidence.Model
             }
         }
 
-
+        private void SetProperty(ref DateTime property, DateTime value, [CallerMemberName] string propertyName = null)
+        {
+            if (property != value)
+            {
+                property = value;
+                OnPropertyChanged(propertyName);
+            }
+        }
         public string StickerText
         {
             get { return Sticker ? "Zakoupena" : "Nezakoupena"; }

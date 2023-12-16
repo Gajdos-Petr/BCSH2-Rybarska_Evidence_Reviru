@@ -17,11 +17,42 @@ namespace Rybarska_Evidence.Model
     }
     public class Member : ObservableObject
     {
-
+        private int id;
         private DateTime birthDay;
+        private string firstName;
+        public int MemberId
+        {
+            get
+            {
+                return id;
+            }
 
-        public int MemberId { get; set; }
-        public string FirstName { get; set; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(id));
+                }
+
+
+            }
+        }   
+        public string FirstName
+        {
+            get
+            {
+                return firstName;
+            }
+            set
+            {
+                if (firstName != value)
+                {
+                    firstName = value;
+                    OnPropertyChanged(nameof(firstName));
+                }
+            }
+        }
 
         public string LastName { get; set; }
 

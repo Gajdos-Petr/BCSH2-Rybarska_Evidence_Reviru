@@ -1,11 +1,14 @@
 ﻿using LiteDB;
+using Rybarska_Evidence.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Rybarska_Evidence.Db
 {
@@ -27,31 +30,55 @@ namespace Rybarska_Evidence.Db
 
         public ObservableCollection<T> LoadData()
         {
-            using (db)
-            {
+          
                 return new ObservableCollection<T>(collection.FindAll());
-            }
         }
 
         public void AddNewItemToDatabase(T item)
         {
-            using(db)
-            {
+           
                 collection.Insert(item);
-            }
+            
         }
 
         public void UpdateItemInDatabase(T item)
         {
-            collection.Update(item);
+            using (db)
+            {
+                collection.Update(item);
+            }
         }
 
         public void DeleteItemInDatabase(T item)
         {
-            using (db)
-            {
-              //  collection.Delete(item);
-            }
+            
+                Member memberSa = item as Member;
+                collection.Delete(memberSa.MemberId);
+                //Type foudnedType = typeof(T);
+                //switch (foudnedType.Name)
+                //{
+                //    case "Member":
+
+                //        break;
+                //}
+
+        }
+
+
+        public int FindMaxId()
+        {
+        
+                PropertyInfo idProperty = typeof(T).GetProperty("MemberId");
+
+                if (idProperty == null)
+                {
+                    // Nějaký kód pro chybové zprávy, protože MemberId není ve vašem typu T.
+                    return 0;
+                }
+
+                var maxId = collection.FindAll().Max(x => (int)idProperty.GetValue(x));
+               return maxId;
+            
         }
 
 
@@ -60,7 +87,7 @@ namespace Rybarska_Evidence.Db
         {
             using (db)
             {
-                var idProperty = typeof(T).GetProperty("LoginIdentifier"); // Nastavte název vlastnosti identifikátoru
+                var idProperty = typeof(T).GetProperty("LoginIdentifier"); 
                 if (idProperty == null)
                 {
                     throw new ArgumentException("Třída musí mít vlastnost 'Id'.");
@@ -70,18 +97,26 @@ namespace Rybarska_Evidence.Db
 
                 if (itemId == null)
                 {
-                    return false; // Pokud Id je null, nemůže být v databázi
+                    return false;
                 }
 
                 return true;
             }
         }
 
-        //public void Add(T item)
-        //{
-        //    collection.Insert(item);
-        //}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                db?.Dispose();
+            }
+        }
 
     }
 }

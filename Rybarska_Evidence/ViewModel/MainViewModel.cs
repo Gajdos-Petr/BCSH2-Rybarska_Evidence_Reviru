@@ -60,6 +60,7 @@ namespace Rybarska_Evidence.ViewModel
 
             MemberInformationViewCommand = new RelayCommand( o =>
             {
+               
                 CurrentView = MemberInformationVM;
               
             }, _ => true);
@@ -78,7 +79,7 @@ namespace Rybarska_Evidence.ViewModel
             }, _ => true);
         }
 
-        public Visibility AdminButtonsVisibility
+        public  Visibility AdminButtonsVisibility
         {
             get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
         }

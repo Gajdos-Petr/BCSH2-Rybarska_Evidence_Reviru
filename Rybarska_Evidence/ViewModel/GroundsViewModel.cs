@@ -2,6 +2,7 @@
 using Microsoft.VisualBasic;
 using Rybarska_Evidence.Core;
 using Rybarska_Evidence.Db;
+using Rybarska_Evidence.Model;
 using Rybarska_Evidence.Models;
 using Rybarska_Evidence.ViewModel;
 using Rybarska_Evidence.Views.UserControls;
@@ -13,6 +14,7 @@ using System.Data.Common;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Rybarska_Evidence.ViewModel
@@ -28,10 +30,9 @@ namespace Rybarska_Evidence.ViewModel
         {
             DatabaseManager = new DatabaseManager<FishingGrounds>("grounds");
             FishingGroundsColl = DatabaseManager.LoadData();
+            DatabaseManager.Dispose();
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
-
-
         }
 
         public GroundsViewModel GroundsVM { get; set; }
@@ -46,7 +47,10 @@ namespace Rybarska_Evidence.ViewModel
             addNewGroundWindow.Show();
         }
 
-
+        public Visibility AdminButtonsVisibility
+        {
+            get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
+        }
     }
 }
 
