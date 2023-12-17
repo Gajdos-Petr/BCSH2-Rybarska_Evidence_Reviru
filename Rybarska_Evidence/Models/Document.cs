@@ -32,8 +32,11 @@ namespace Rybarska_Evidence.Model
             
             set
             {
-                SetProperty(ref license, value);
-                OnPropertyChanged(nameof(license));
+             if (license != value)
+                {
+                    license = value;
+                    OnPropertyChanged(nameof(License));
+                }
 
             }
         
@@ -46,11 +49,14 @@ namespace Rybarska_Evidence.Model
             
             set
             {
-                //SetProperty(ref sticker, value);
-                OnPropertyChanged(nameof(StickerText));
+                if (sticker != value)
+                {
+                    sticker = value;
+                    OnPropertyChanged(nameof (sticker));
+                }
             }
                 
-                }
+        }
         public PermitType TypeOfPermit
         {
             get
@@ -60,9 +66,11 @@ namespace Rybarska_Evidence.Model
 
             set
             {
-                //SetProperty(ref sticker, value);
-                permit = value;
-                OnPropertyChanged(nameof(permit));
+                if (permit != value)
+                {
+                    permit = value;
+                    OnPropertyChanged(nameof (permit));
+                }
             }
         }
 

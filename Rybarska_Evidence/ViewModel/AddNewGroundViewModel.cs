@@ -10,24 +10,42 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Rybarska_Evidence.ViewModel
 {
     public class AddNewGroundViewModel
     {
 
-        public RelayCommand AddNewGroundCommand {  get; set; }
-       // private DatabaseManager<FishingGrounds> databate;
+        public RelayCommand AddGroundCommand {  get; set; }
+        private DatabaseManager<FishingGrounds> DatabaseManager { get; set; }
+
+        public FishingGrounds SelectedGround { get; set; }
+        public RelayCommand CancelCommand { get; set; }
 
 
-        public RelayCommand TestCommand { get; set; }
-
+        public List<GeoundsType> GroundTypes { get; set; }
         public AddNewGroundViewModel()
         {
-            AddNewGroundCommand = new RelayCommand(AddNewGround, CanAddNewGround);
+            AddGroundCommand = new RelayCommand(AddNewGround, CanAddNewGround);
+            GroundTypes = Enum.GetValues(typeof(GeoundsType)).Cast<GeoundsType>().ToList();
+            SelectedGround = new FishingGrounds();
+            CancelCommand = new RelayCommand(CancelWindow, CanCancel);
+            DatabaseManager = new DatabaseManager<FishingGrounds>("grounds");
 
         }
+        private bool CanCancel(object obj)
+        {
+            return true;
+        }
 
+        private void CancelWindow(object obj)
+        {
+            DatabaseManager.Dispose();
+
+            App.Current.Windows[1].Close();
+
+        }
         private bool CanAddNewGround(object obj)
         {
             return true;
@@ -35,40 +53,38 @@ namespace Rybarska_Evidence.ViewModel
 
         private void AddNewGround(object obj)
         {
-            //   FishingGrounds addGround = new FishingGrounds { Number = 111, Name = "Labe 24", PositionNumber = 1, PositionName = "Kolák", GeoundsType = GeoundsType.Mimopstruhovy, Size = 34.5, Description = "popis ktery poitom domyslim" };
-            //  databate.AddNewItemToCollection(addGround);
-            //string _BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            //pridani do listu
+            GroundsViewModel.FishingGroundsColl.Add(new FishingGrounds
+            {
 
-          
-            //using (var db = new LiteDatabase(Path.GetFullPath(Path.Combine(_BaseDirectory, @"..\..\..\..\Db\FishingData.db"))))
-            //{
-            //    FishingGrounds addGround = new FishingGrounds { Number = 111, Name = "Labe 24", PositionNumber = 1, PositionName = "Kolák", GeoundsType = GeoundsType.Mimopstruhovy, Size = 34.5, Description = "popis ktery poitom domyslim" };
-            //    //Member newMember = new Member
-            //    //{
-            //    //    MemberId = 1,
-            //    //    FirstName = "Kamil",
-            //    //    LastName = "Vocas",
-            //    //    DateOfBirth = DateTime.Now,
-            //    //    MemberType = MemberType.Vedeni,
-            //    //    Document = new Document
-            //    //    {
-            //    //        License = DateTime.Now,
-            //    //        Sticker = false,
-            //    //        TypeOfPermit = PermitType.Mistni
-            //    //    }
-            //    //};
-            //    var col = db.GetCollection<FishingGrounds>("grounds");
+                Id = SelectedGround.Id = DatabaseManager.FindMaxId() + 1,
+                Number = SelectedGround.Number,
+                Name = SelectedGround.Name,
+                PositionNumber = SelectedGround.PositionNumber,
+                PositionName = SelectedGround.PositionName,
+                GeoundsType = SelectedGround.GeoundsType,
+                Size = SelectedGround.Size,
+                Description = SelectedGround.Description,
 
+            });
+            //Pridat do databáze
+            MessageBox.Show(SelectedGround.Id.ToString());
 
-            //    col.Insert(addGround);
-            //}
+            DatabaseManager.AddNewItemToDatabase(SelectedGround);
+            ClearBoxes();
         }
 
-        private bool CanTest(object obj)
+        private void ClearBoxes()
         {
-            return true;
+            SelectedGround.Number = 0;
+            SelectedGround.Name = string.Empty;
+            SelectedGround.PositionNumber = 0;
+            SelectedGround.PositionName = string.Empty;
+            SelectedGround.GeoundsType = GeoundsType.Mimopstruhovy;
+            SelectedGround.Size = 0;
+            SelectedGround.Description = "";
         }
 
-      
+
     }
 }

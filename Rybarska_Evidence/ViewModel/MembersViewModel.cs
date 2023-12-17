@@ -3,6 +3,7 @@ using Rybarska_Evidence.Core;
 using Rybarska_Evidence.Db;
 using Rybarska_Evidence.Model;
 using Rybarska_Evidence.Models;
+using Rybarska_Evidence.ViewModel.Edit;
 using Rybarska_Evidence.Views.UserControls;
 using System;
 using System.Collections.Generic;
@@ -27,6 +28,9 @@ namespace Rybarska_Evidence.ViewModel
         public Member SelectedMember { get; set; }
         public RelayCommand ShowAddWindowCommand { get; set; }
 
+        public RelayCommand ShowEditWindowCommand { get; set; }
+
+
         public RelayCommand RemoveMemberCommand { get; set; }
         public MembersViewModel()
         {
@@ -35,7 +39,24 @@ namespace Rybarska_Evidence.ViewModel
             DatabaseManager.Dispose();
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
+            ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditWindow);
             RemoveMemberCommand = new RelayCommand(RemoveMember, CanRemoveMember);
+        }
+
+
+
+        private bool CanShowEditWindow(object obj)
+        {
+            return SelectedMember != null;
+        }
+
+        private void ShowEditWindow(object obj)
+        {
+            EditMemberViewModel editMemberViewModel = new EditMemberViewModel(SelectedMember);
+            AddNewMember editMemberWindow = new AddNewMember { DataContext = editMemberViewModel};
+            editMemberWindow.Show();
+            DatabaseManager.Dispose();
+
         }
 
 
@@ -45,7 +66,8 @@ namespace Rybarska_Evidence.ViewModel
         }
         private void ShowAddWindow(object obj)
         {
-            AddNewMember addNewMemberWindow = new AddNewMember();
+           AddNewMemberViewModel addNewMemberViewModel = new AddNewMemberViewModel();
+            AddNewMember addNewMemberWindow = new AddNewMember { DataContext = addNewMemberViewModel};
             addNewMemberWindow.Show();
             DatabaseManager.Dispose();
         }
@@ -55,9 +77,29 @@ namespace Rybarska_Evidence.ViewModel
 
         private void RemoveMember(object obj)
         {
-            DatabaseManager = new DatabaseManager<Member>("members");
-            DatabaseManager.DeleteItemInDatabase(SelectedMember);
-            DatabaseManager.Dispose();
+            if (SelectedMember.Equals(LoginService.CurrentLogedMember))
+            {
+                MessageBox.Show("Nelze odebrat tohoto člena, protože jste za něho aktuálně přihlášen");
+            }
+            else
+            {
+                //Odebrani loginu clena
+                var databaseManagerDva = new DatabaseManager<MemberLogin>("logins");
+                var l = new MemberLogin { LoginIdentifier = SelectedMember.MemberId };
+                databaseManagerDva.DeleteItemInDatabase(l);
+                databaseManagerDva.Dispose();
+
+                //Odebrani clena z databaze
+                DatabaseManager = new DatabaseManager<Member>("members");
+                DatabaseManager.DeleteItemInDatabase(SelectedMember);
+                DatabaseManager.Dispose();
+                //odebrani jeho loginu pro prihlaseni
+
+                Members.Remove(SelectedMember);
+            }
+   
+
+
 
         }
 

@@ -6,58 +6,66 @@
         xmlns:local="clr-namespace:Rybarska_Evidence.Views.UserControls"
         xmlns:uc="clr-namespace:Rybarska_Evidence.Resources"
         mc:Ignorable="d"
-        Title="AddNewMember" Height="600" Width="900">
+        Title="AddNewMember" Height="600" Width="900"
+               Background="Transparent" ResizeMode="NoResize"
+                WindowStyle="None"
+                AllowsTransparency="True" 
+        >
     <Window.Resources>
         <Style TargetType="{x:Type Window}" x:Key="baseStyle">
             <Setter Property="FontFamily" Value="Bahnschrift" />
         </Style>
  
     </Window.Resources>
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
-            <RowDefinition Height="75*"/>
-            <RowDefinition Height="15*"/>
-        </Grid.RowDefinitions>
-
-       
-
-        <Grid Margin="40" Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
+    <Border Background="#FEFFFF" CornerRadius="20">
+        <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-      
-
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="15*"/>
             </Grid.RowDefinitions>
-            <StackPanel Margin="10,0,10,0">
-                <TextBlock Text="Jméno"/>
-                <TextBox Grid.Row="0" Grid.Column="0" Margin="0,10,0,0" Text="{Binding NewMemberToAdd.FirstName}" Height="35" FontFamily="Bahnschrift" />
-            </StackPanel>
-            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding NewMemberToAdd.LastName}" Margin="25" FontFamily="Bahnschrift"/>
-            <DatePicker Grid.Row="1"  Grid.Column="0" SelectedDate="{Binding NewMemberToAdd.DateOfBirth}" Margin="25" FontFamily="Bahnschrift"/>
-            <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesMembers}" SelectedItem="{Binding NewMemberToAdd.MemberType}" Margin="25" />
-            <DatePicker  Grid.Row="2"  Grid.Column="0" SelectedDate="{Binding NewMemberToAdd.Document.License}" Margin="25"/>
-            <TextBox Grid.Row="2"  Grid.Column="1" Margin="25"/>
-            <ComboBox Grid.Row="3"  Grid.Column="0" ItemsSource="{Binding Permits}" SelectedItem="{Binding NewMemberToAdd.Document.TypeOfPermit}" Margin="25"/>
-       
+
+
+
+            <Grid Margin="40" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+
+
+                </Grid.RowDefinitions>
+                <StackPanel Margin="10,0,10,0">
+                    <TextBlock Text="Jméno"/>
+                    <TextBox Grid.Row="0" Grid.Column="0" Margin="0,10,0,0" Text="{Binding SelectedMember.FirstName}" Height="35" FontFamily="Bahnschrift" />
+                </StackPanel>
+                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedMember.LastName}" Margin="25" FontFamily="Bahnschrift"/>
+                <DatePicker Grid.Row="1"  Grid.Column="0" SelectedDate="{Binding SelectedMember.DateOfBirth}" Margin="25" FontFamily="Bahnschrift"/>
+                <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesMembers}" SelectedItem="{Binding SelectedMember.MemberType}" Margin="25" />
+                <DatePicker  Grid.Row="2"  Grid.Column="0" SelectedDate="{Binding SelectedMember.Document.License}" Margin="25"/>
+                <TextBox Grid.Row="2"  Grid.Column="1" Margin="25"/>
+                <ComboBox Grid.Row="3"  Grid.Column="0" ItemsSource="{Binding Permits}" SelectedItem="{Binding SelectedMember.Document.TypeOfPermit}" Margin="25"/>
+
+            </Grid>
+
+            <Border Grid.Row="2" Background="#3AAFA9" CornerRadius="0,0,20,20">
+
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="ZPĚT" Command="{Binding CancelAddNewMemberCommand}" Width="200" Height="40" FontFamily="Bahnschrift" Click="Button_Click"/>
+                    <Button Grid.Column="1" Content="PŘIDAT" Command="{Binding AddNewMemberCommand}" Width="200" Height="40" FontFamily="Bahnschrift"/>
+                </Grid>
+
+            </Border>   
         </Grid>
-
-        <Grid Grid.Row="2" Background="#3AAFA9">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="ZPĚT" Command="{Binding CancelAddNewMemberCommand}" Width="200" Height="40" FontFamily="Bahnschrift" Click="Button_Click"/>
-            <Button Grid.Column="1" Content="PŘIDAT" Command="{Binding AddNewMemberCommand}" Width="200" Height="40" FontFamily="Bahnschrift"/>
-        </Grid>
-
-
-    </Grid>
+    </Border>
 </Window>

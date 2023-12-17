@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rybarska_Evidence.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,18 +13,173 @@ namespace Rybarska_Evidence.Models
         Mimopstruhovy
     }
 
-   public class FishingGrounds
+   public class FishingGrounds : ObservableObject
     {
-        public int Number { get; set; }
-        public string? Name { get; set; }
+        private int id;
+        private int number;
+        private string name;
+        private int positionNumber;
+        private string positionName;
+        private GeoundsType type;
+        private double size;
+        private string desc;
 
-        public int? PositionNumber { get; set; }
-        public string? PositionName { get; set; }
 
-        public GeoundsType GeoundsType { get; set; }
 
-        public double Size { get; set; }
+        public int Id
+        {
+            get
+            {
+                return id;
+            }
 
-        public string? Description { get; set; }
+            set
+            {
+                if (id != value)
+                {
+                    id = value;
+                    OnPropertyChanged(nameof(id));
+                }
+
+
+            }
+        }
+
+        public int Number
+        {
+            get
+            {
+                return number;
+            }
+
+            set
+            {
+                if (number != value)
+                {
+                    number = value;
+                    OnPropertyChanged(nameof(number));
+                }
+
+
+            }
+        }
+        public string? Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                if (name != value)
+                {
+                    name = value;
+                    OnPropertyChanged(nameof(name));
+                }
+
+
+            }
+        }
+
+        public int PositionNumber
+        {
+            get
+            {
+                return positionNumber;
+            }
+
+            set
+            {
+                if (positionNumber != value)
+                {
+                    positionNumber = value;
+                    OnPropertyChanged(nameof(positionNumber));
+                }
+
+
+            }
+        }
+
+        public string? PositionName
+        {
+            get
+            {
+                return positionName;
+            }
+
+            set
+            {
+                if (positionName != value)
+                {
+                    positionName = value;
+                    OnPropertyChanged(nameof(positionName));
+                }
+
+
+            }
+        }
+
+        public GeoundsType GeoundsType
+        {
+            get
+            {
+                return type;
+            }
+
+            set
+            {
+                if (type != value)
+                {
+                    type = value;
+                    OnPropertyChanged(nameof(type));
+                }
+
+
+            }
+        }
+
+        public double Size
+        {
+            get
+            {
+                return size;
+            }
+
+            set
+            {
+                if (size != value)
+                {
+                    size = value;
+                    OnPropertyChanged(nameof(size));
+                }
+
+
+            }
+        }
+
+        public string? Description
+        {
+            get
+            {
+                return desc;
+            }
+
+            set
+            {
+                if (desc != value)
+                {
+                    desc = value;
+                    OnPropertyChanged(nameof(desc));
+                }
+
+
+            }
+        }
+
+        public override string? ToString()
+        {
+            return Id.ToString() + Name;
+        }
     }
 }

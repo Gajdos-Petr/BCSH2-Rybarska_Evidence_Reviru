@@ -15,9 +15,12 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
-            <Button Visibility="{Binding AdminButtonsVisibility}" Height="30" Width="90" Content="+ PŘIDAT" Command="{Binding ShowAddWindowCommand}"/>
+            <Button Height="30" Width="120" Content=" PŘIDAT Revir" Command="{Binding ShowAddWindowCommand}"/>
+            <Button Height="30" Width="120" Content=" ODEBRAT " Command="{Binding RemoveGroundCommand}" Margin="10,0,10,0"/>
+            <Button Height="30" Width="120" Content=" UPRAVIT " Command="{Binding ShowEditWindowCommand}"/>
+
         </StackPanel >
-        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}">
+        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}" SelectedValue="{Binding SelectedGround}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Number}" Header="Číslo" Width="60"/>

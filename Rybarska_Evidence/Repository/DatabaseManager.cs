@@ -1,6 +1,9 @@
 ﻿using LiteDB;
 using Rybarska_Evidence.Model;
+using Rybarska_Evidence.Models;
+using Rybarska_Evidence.Views.UserControls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -36,47 +39,130 @@ namespace Rybarska_Evidence.Db
 
         public void AddNewItemToDatabase(T item)
         {
-           
-                collection.Insert(item);
-            
+            Type foudnedType = typeof(T);
+            switch (foudnedType.Name)
+            {
+                case "Member":
+                    collection.Insert(item);
+                    Member memberSa = item as Member;
+                    var collectionLogins = db.GetCollection<Models.MemberLogin>("logins");
+                    var newLogin = new Models.MemberLogin { LoginIdentifier = memberSa.MemberId, Password = "heslo" };
+                    collectionLogins.Insert(newLogin);
+
+                    break;
+
+                case "FishingGrounds":
+                    collection.Insert(item);
+                    break;
+
+                case "Catch":
+                    collection.Insert(item);
+                break;
+            }
+
         }
 
         public void UpdateItemInDatabase(T item)
         {
-            using (db)
-            {
-                collection.Update(item);
-            }
+               collection.Update(item);
+            
         }
 
         public void DeleteItemInDatabase(T item)
         {
-            
-                Member memberSa = item as Member;
-                collection.Delete(memberSa.MemberId);
-                //Type foudnedType = typeof(T);
-                //switch (foudnedType.Name)
-                //{
-                //    case "Member":
 
-                //        break;
-                //}
+            List<T> itemList = collection.FindAll().ToList();
+            collection.DeleteAll();
+
+            foreach (var t in itemList)
+            {
+
+                switch (typeof(T).Name)
+                {
+                    case "FishingGrounds":
+
+                        FishingGrounds ground = t as FishingGrounds;
+                        FishingGrounds groundToRemove = item as FishingGrounds;
+
+                        if (ground.Id != groundToRemove.Id)
+                        {
+                            collection.Insert(t);
+                        }
+                        break;
+                    case "Member":
+                        Member member = t as Member;
+                        Member memberToRemove = item as Member;
+                        if (member.MemberId != memberToRemove.MemberId)
+                        {
+                            collection.Insert(t);
+                        }
+                        break;
+                    case "MemberLogin":
+                        MemberLogin l = t as MemberLogin;
+                        MemberLogin memberLoginToRemove = item as MemberLogin;
+                        if (l.LoginIdentifier != memberLoginToRemove.LoginIdentifier)
+                        {
+                            collection.Insert(t);
+                        }
+                        break;
+
+                }
+            }
+
+
 
         }
 
+        public void DeleteLoginTest()
+        {
+          
+            collection.DeleteAll();
+        }
+        public T GetItemFromDatabase(int memberId)
+        {
+            //var foundMember = collection.Find(Query.EQ("MemberId", memberId));
+          var foundMember =  collection.FindById(memberId);
+            return foundMember;
+        }
 
         public int FindMaxId()
         {
-        
-                PropertyInfo idProperty = typeof(T).GetProperty("MemberId");
+            int maxId;
+            if (collection.Count() == 0)
+            {
+                maxId = 0;
+            }
+            else {
+                PropertyInfo idProperty = null;
+
+                switch (typeof(T).Name)
+                {
+                    case "Member":
+
+                 idProperty = typeof(T).GetProperty("MemberId");
+
+                        break;
+
+                    case "FishingGrounds":
+                        idProperty = typeof(T).GetProperty("Id");
+
+                        break;
+                    default:
+
+
+                        break;
+                        
+                }
 
                 if (idProperty == null)
                 {
-                    // Nějaký kód pro chybové zprávy, protože MemberId není ve vašem typu T.
                     return 0;
                 }
 
-                var maxId = collection.FindAll().Max(x => (int)idProperty.GetValue(x));
+                maxId = collection.FindAll().Max(x => (int)idProperty.GetValue(x));
+
+            }
+
                return maxId;
             
         }
@@ -85,23 +171,11 @@ namespace Rybarska_Evidence.Db
 
         public bool IsInDatabase(T item)
         {
-            using (db)
-            {
-                var idProperty = typeof(T).GetProperty("LoginIdentifier"); 
-                if (idProperty == null)
-                {
-                    throw new ArgumentException("Třída musí mít vlastnost 'Id'.");
-                }
 
-                var itemId = idProperty.GetValue(item, null);
+            var login = item as Models.MemberLogin;
+            return collection.Exists(Query.And(Query.EQ("LoginIdentifier", login.LoginIdentifier), Query.EQ("Password", login.Password)));
 
-                if (itemId == null)
-                {
-                    return false;
-                }
 
-                return true;
-            }
         }
 
         public void Dispose()

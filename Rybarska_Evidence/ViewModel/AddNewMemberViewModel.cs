@@ -16,7 +16,7 @@ namespace Rybarska_Evidence.ViewModel
     public class AddNewMemberViewModel
     {
 
-        public Member NewMemberToAdd { get; set; }
+        public Member SelectedMember { get; set; }
 
         public RelayCommand AddNewMemberCommand { get; set; }
         
@@ -31,14 +31,14 @@ namespace Rybarska_Evidence.ViewModel
             TypesMembers = Enum.GetValues(typeof(MemberType)).Cast<MemberType>().ToList();
             DatabaseManager = new DatabaseManager<Member>("members");
 
-            NewMemberToAdd = new Member { DateOfBirth = DateTime.Now, Document = new Document {License = DateTime.Now } };
+            SelectedMember = new Member { DateOfBirth = DateTime.Now, Document = new Document {License = DateTime.Now } };
         }
 
         private bool CanAddNewMember(object obj)
         {
             // Ověření, zda jsou vyplněna povinná pole
-            bool isFirstNameValid = !string.IsNullOrEmpty(NewMemberToAdd.FirstName);
-            bool isLastNameValid = !string.IsNullOrEmpty(NewMemberToAdd.LastName);
+            bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
+            bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
             //bool isDateOfBirthValid = NewMemberToAdd.DateOfBirth.;
             //bool isLicenseValid = NewMemberToAdd.Document.License.HasValue;
            // bool isPermitTypeValid = NewMemberToAdd.Document.TypeOfPermit != PermitType.Zadna; // Upravte podle vašich pravidel
@@ -53,26 +53,40 @@ namespace Rybarska_Evidence.ViewModel
         private void AddNewMember(object obj)
         {
 
-            //MessageBox.Show(NewMemberToAdd.Document.TypeOfPermit.ToString());
+
             MembersViewModel.Members.Add(new Member {
-                MemberId = NewMemberToAdd.MemberId = DatabaseManager.FindMaxId() + 1,
-                FirstName = NewMemberToAdd.FirstName, 
-                LastName = NewMemberToAdd.LastName, 
-                DateOfBirth = NewMemberToAdd.DateOfBirth,
-                MemberType = NewMemberToAdd.MemberType,
+                MemberId = SelectedMember.MemberId = DatabaseManager.FindMaxId() + 1,
+                FirstName = SelectedMember.FirstName, 
+                LastName = SelectedMember.LastName, 
+                DateOfBirth = SelectedMember.DateOfBirth,
+                MemberType = SelectedMember.MemberType,
                 Document = new Document
                 {
-                    License = NewMemberToAdd.Document.License,
-                    Sticker = NewMemberToAdd.Document.Sticker,
-                    TypeOfPermit = NewMemberToAdd.Document.TypeOfPermit
+                    License = SelectedMember.Document.License,
+                    Sticker = SelectedMember.Document.Sticker,
+                    TypeOfPermit = SelectedMember.Document.TypeOfPermit
                 }
             });
             //Pridat do databáze
-           DatabaseManager.AddNewItemToDatabase(NewMemberToAdd);
-            DatabaseManager.Dispose();
+           DatabaseManager.AddNewItemToDatabase(SelectedMember);
+            ClearBoxes();
         }
 
 
+       
+
+        private void ClearBoxes()
+        {
+            SelectedMember.FirstName = "";
+            SelectedMember.LastName = "";
+            SelectedMember.DateOfBirth = DateTime.Now;
+            SelectedMember.MemberType = MemberType.Clen;
+            SelectedMember.Document.License = DateTime.Now;
+            SelectedMember.Document.Sticker = false;
+            SelectedMember.Document.TypeOfPermit = PermitType.Mistni;
+
+      
+        }
         private bool CanCancel(object obj)
         {
             return true;
@@ -80,6 +94,8 @@ namespace Rybarska_Evidence.ViewModel
 
         private void CancelWindow(object obj)
         {
+            DatabaseManager.Dispose();
+           App.Current.Windows[1].Close();
 
         }
 

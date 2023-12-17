@@ -1,0 +1,91 @@
+﻿<Window x:Class="Rybarska_Evidence.Views.AddEditGround"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rybarska_Evidence.Views"
+        mc:Ignorable="d"
+        Title="AddEditGround" Height="600" Width="900"
+         Background="Transparent" ResizeMode="NoResize"
+  WindowStyle="None"
+  AllowsTransparency="True" >
+
+    <Border Background="#FEFFFF" CornerRadius="20">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="75*"/>
+                <RowDefinition Height="15*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Height="438" Margin="0,58,0,0" Grid.RowSpan="2" VerticalAlignment="Top">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="70*" />
+                    <RowDefinition Height="30*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Margin="40,40,40,0" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                        <RowDefinition/>
+
+
+                    </Grid.RowDefinitions>
+                    <StackPanel Margin="10,0,10,0" Grid.Row="0" Grid.Column="0">
+                        <TextBlock Text="Číslo revíru"/>
+                        <TextBox  Margin="0,10,0,0" Text="{Binding SelectedGround.Number}" Height="35" FontFamily="Bahnschrift" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0,10,0" Grid.Row="0" Grid.Column="1" >
+                        <TextBlock Text="Název revíru"/>
+                        <TextBox Margin="0,10,0,0" Text="{Binding SelectedGround.Name}" Height="35" FontFamily="Bahnschrift" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="0" >
+                        <TextBlock Text="Číslo podrevíru"/>
+                        <TextBox Margin="0,10,0,0" Text="{Binding SelectedGround.PositionNumber}" Height="35" FontFamily="Bahnschrift" />
+                    </StackPanel>
+                    <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" >
+                        <TextBlock Text="Název podrevíru"/>
+                        <TextBox Margin="0,10,0,0" Text="{Binding SelectedGround.PositionName}" Height="35" FontFamily="Bahnschrift" />
+                    </StackPanel>
+
+                    <StackPanel Margin="10,0,10,0" Grid.Row="2" Grid.Column="0" >
+                        <TextBlock Text="Typ revíru"/>
+                        <ComboBox ItemsSource="{Binding GroundTypes}" SelectedItem="{Binding SelectedGround.GeoundsType}" Margin="0,10,0,0" Height="35" FontFamily="Bahnschrift"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" >
+                        <TextBlock Text="Velikost revíru"/>
+                        <TextBox Margin="0,10,0,0" Text="{Binding SelectedGround.Size}" Height="35" FontFamily="Bahnschrift" />
+                    </StackPanel>
+                </Grid>
+
+                <Grid Grid.Row="1" Margin="40,0,40,0">
+                    <StackPanel Margin="10,0,10,0"  >
+                        <TextBlock Text="Velikost revíru"/>
+                        <TextBox Margin="0,10,0,0" Text="{Binding SelectedGround.Description}"  FontFamily="Bahnschrift"    TextWrapping="Wrap"
+             AcceptsReturn="True"
+        VerticalScrollBarVisibility="Visible" Height="95" />
+                    </StackPanel>
+                </Grid>
+
+
+            </Grid>
+            <Border Grid.Row="2" Background="#3AAFA9" CornerRadius="0,0,20,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" Content="ZPĚT" Width="200" Command="{Binding CancelCommand}" Height="40" FontFamily="Bahnschrift" Click="Button_Click"/>
+                    <Button Grid.Column="1" Content="POTVRDIT" Command="{Binding AddGroundCommand}" Width="200" Height="40" FontFamily="Bahnschrift"/>
+            </Grid>
+            </Border>
+        </Grid>
+    </Border>
+</Window>

@@ -20,6 +20,10 @@ namespace Rybarska_Evidence.Model
         private int id;
         private DateTime birthDay;
         private string firstName;
+        private string lastName;
+        private MemberType type;
+        private Document doc;
+
         public int MemberId
         {
             get
@@ -54,7 +58,21 @@ namespace Rybarska_Evidence.Model
             }
         }
 
-        public string LastName { get; set; }
+        public string LastName
+        {
+            get
+            {
+                return lastName;
+            }
+            set
+            {
+                if (lastName != value)
+                {
+                    lastName = value;
+                    OnPropertyChanged(nameof(lastName));
+                }
+            }
+        }
 
         public DateTime DateOfBirth {
             get
@@ -69,6 +87,29 @@ namespace Rybarska_Evidence.Model
         
         }
 
+        public MemberType MemberType
+        {
+            get
+            {
+                return type;
+            }
+            set
+            {
+                if (type != value)
+                {
+                    type = value;
+                    OnPropertyChanged(nameof(type));
+                }
+            }
+        }
+
+        public Document Document
+        {
+            get; set;
+        }
+
+
+
         private void SetProperty(ref DateTime property, DateTime value, [CallerMemberName] string propertyName = null)
         {
             if (property != value)
@@ -78,15 +119,28 @@ namespace Rybarska_Evidence.Model
             }
         }
 
-        public MemberType MemberType { get; set; }
+        public override bool Equals(object? obj)
+        {
+            return obj is Member member &&
+                   id == member.id;
+        }
 
-        public Document Document { get; set; }
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(MemberType);
+        }
 
+        public Member()
+        {
+        }
 
         public string FormattedDateOfBirth
         {
             get { return DateOfBirth.ToString("dd.MM.yyyy"); }
         }
+
+
+
 
     }
 }

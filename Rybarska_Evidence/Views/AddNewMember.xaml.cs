@@ -24,9 +24,6 @@ namespace Rybarska_Evidence.Views.UserControls
         {
             InitializeComponent();
             WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-
-            AddNewMemberViewModel addNewMemberViewModel = new AddNewMemberViewModel();
-            DataContext = addNewMemberViewModel;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

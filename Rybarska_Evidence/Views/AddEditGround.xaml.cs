@@ -13,18 +13,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Rybarska_Evidence.Views.UserControls
+namespace Rybarska_Evidence.Views
 {
     /// <summary>
-    /// Interakční logika pro AddNewGround.xaml
+    /// Interakční logika pro AddEditGround.xaml
     /// </summary>
-    public partial class AddNewGround : Window
+    public partial class AddEditGround : Window
     {
-        public AddNewGround()
+        public AddEditGround()
         {
             InitializeComponent();
-            AddNewGroundViewModel addNewGroundViewModel = new AddNewGroundViewModel();
-            DataContext = addNewGroundViewModel;
+            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

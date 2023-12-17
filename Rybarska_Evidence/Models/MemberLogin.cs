@@ -13,19 +13,19 @@ namespace Rybarska_Evidence.Models
         Admin
     }
 
-    public class Login : ObservableObject
+    public class MemberLogin : ObservableObject
     {
 
-        private int id;
+        private int loginId;
         private string password;
 
         public int LoginIdentifier
         {
-            get { return id; }
+            get { return loginId; }
             set
             {
-                id = value;
-                OnPropertyChanged(nameof(id));
+                loginId = value;
+                OnPropertyChanged(nameof(loginId));
             }
         }
 

@@ -11,35 +11,43 @@ namespace Rybarska_Evidence.Core
     {
 
         private static LoginService instance;
-        private Member currentLogedMember;
+        public static Member CurrentLogedMember { get; set; }
 
-
-        public static LoginService Instance
+        public LoginService(Member loged)
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new LoginService();
-                }
-                return instance;
-            }
+
+            CurrentLogedMember = loged;   
         }
 
-        public Member CurrentLogedMember
-        {
-            get { return currentLogedMember; }
-            set
-            {
-                if (currentLogedMember != value)
-                {
-                    currentLogedMember = value;
-                    OnCurrentLogedMemberChanged?.Invoke(this, EventArgs.Empty);
-                }
-            }
-        }
 
-        public event EventHandler OnCurrentLogedMemberChanged;
+
+
+        //public static LoginService Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //            instance = new LoginService();
+        //        }
+        //        return instance;
+        //    }
+        //}
+
+        //public Member CurrentLogedMember
+        //{
+        //    get { return currentLogedMember; }
+        //    set
+        //    {
+        //        if (currentLogedMember != value)
+        //        {
+        //            currentLogedMember = value;
+        //            OnCurrentLogedMemberChanged?.Invoke(this, EventArgs.Empty);
+        //        }
+        //    }
+        //}
+
+        //public event EventHandler OnCurrentLogedMemberChanged;
 
     }
 }

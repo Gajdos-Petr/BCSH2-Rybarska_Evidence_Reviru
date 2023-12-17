@@ -2,7 +2,9 @@
 using Microsoft.VisualBasic;
 using Rybarska_Evidence.Core;
 using Rybarska_Evidence.Db;
+using Rybarska_Evidence.Model;
 using Rybarska_Evidence.Models;
+using Rybarska_Evidence.Views;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,52 +20,47 @@ namespace Rybarska_Evidence.ViewModel
 {
     public class LoginViewModel
     {
-        public Login NewLogin { get; set; }
+        public MemberLogin NewLogin { get; set; }
 
         public RelayCommand LoginCommand { get; }
 
-        private  ILiteCollection<Login> col;
-        
+        private  ILiteCollection<MemberLogin> col;
+
+        private DatabaseManager<MemberLogin> DatabaseManager { get; set; }
         public LoginViewModel()
         {
-          //  loginRepository = new DatabaseManager<Login>(databaseManager.GetDatabaseInstance(), "logins");
 
-            //LoginCommand = new RelayCommand(OnLogin, CanLogin);
-            NewLogin = new Login();
+            LoginCommand = new RelayCommand(OnLogin, CanLogin);
+            NewLogin = new MemberLogin();
         }
 
         private void OnLogin(object obj)
         {
-            //using (var db = new LiteDatabase(@"Database/FishingDataNewTest.db"))
-            //{
-            //    col = db.GetCollection<Login>("logins");
-
-            //    if (IsInDatabase())
-            //    {
-            //        MessageBox.Show("Je v databázi");
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Není v databázi");
-            //    }
-
-
-                //var Login = new Login { LoginIdentifier = 1, Password = "password" };
-                //col.Insert(Login);
-                //var allLogins = col.FindAll();
-
-      
-
+            DatabaseManager = new DatabaseManager<MemberLogin>("logins");
+       
+            bool r = DatabaseManager.IsInDatabase(NewLogin);
+            DatabaseManager.Dispose();
+            if (r)
+            {
+                DatabaseManager<Member> db = new DatabaseManager<Member>("members");
+                LoginService.CurrentLogedMember = db.GetItemFromDatabase(NewLogin.LoginIdentifier);
+                db.Dispose();
+                MainApp mainApp = new MainApp();
+                mainApp.Show();
+                App.Current.Windows[0].Close();
             }
+            else
+            {
+                MessageBox.Show("Nejsi");
+            }
+
+
         }
-      
-        //private bool IsInDatabase()
-        //{
-        //    return col.Exists(Query.And(Query.EQ("LoginIdentifier", NewLogin.LoginIdentifier), Query.EQ("Password", NewLogin.Password)));
-        //}
-        //private bool CanLogin(object obj)
-        //{
-        //    return NewLogin.LoginIdentifier > 0 && !string.IsNullOrEmpty(NewLogin.Password);
-        //}
-    //}
+
+     
+        private bool CanLogin(object obj)
+        {
+            return NewLogin.LoginIdentifier > 0 && !string.IsNullOrEmpty(NewLogin.Password);
+        }
+    }
 }

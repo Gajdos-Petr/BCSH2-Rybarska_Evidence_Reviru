@@ -10,6 +10,7 @@ namespace Rybarska_Evidence.Models
 
     public class Visit
     {
+        public int Id { get; set; }
         public int MemberId { get; set; }
         public int? SecondIdOfGround { get; set; }
         public int GroundId { get; set; }
