@@ -38,9 +38,9 @@ namespace Rybarska_Evidence.ViewModel
         {
             DatabaseManager = new DatabaseManager<MemberLogin>("logins");
        
-            bool r = DatabaseManager.IsInDatabase(NewLogin);
+            bool isIn = DatabaseManager.IsInDatabase(NewLogin);
             DatabaseManager.Dispose();
-            if (r)
+            if (isIn)
             {
                 DatabaseManager<Member> db = new DatabaseManager<Member>("members");
                 LoginService.CurrentLogedMember = db.GetItemFromDatabase(NewLogin.LoginIdentifier);
@@ -51,7 +51,7 @@ namespace Rybarska_Evidence.ViewModel
             }
             else
             {
-                MessageBox.Show("Nejsi");
+                MessageBox.Show("Chybné přihlašovací údaje", "Chyba při přihlášení");
             }
 
 

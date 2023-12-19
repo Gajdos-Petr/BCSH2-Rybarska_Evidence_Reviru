@@ -1,5 +1,4 @@
-﻿using Rybarska_Evidence.ViewModel;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,22 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Login.xaml
+    /// Interakční logika pro Catches.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class Catches : UserControl
     {
-        public Login()
+        public Catches()
         {
             InitializeComponent();
-            WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
-            LoginViewModel loginViewModel = new LoginViewModel();
-            DataContext = loginViewModel;
         }
-
     }
 }

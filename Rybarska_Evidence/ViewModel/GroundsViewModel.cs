@@ -30,6 +30,9 @@ namespace Rybarska_Evidence.ViewModel
 
         public RelayCommand ShowEditWindowCommand { get; set; }
 
+        public RelayCommand ShowInfoWindowCommand { get; set; }
+
+
         private DatabaseManager<FishingGrounds> DatabaseManager { get; set; }
      
         public  FishingGrounds SelectedGround { get; set; }
@@ -47,9 +50,17 @@ namespace Rybarska_Evidence.ViewModel
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
             RemoveGroundCommand = new RelayCommand(RemoveGround, CanRemoveGround);
             ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditWindow);
-
+            ShowInfoWindowCommand = new RelayCommand(ShowInfo, CanShowAddWindow);
 
         }
+
+        private void ShowInfo(object obj)
+        {
+            MessageBox.Show(SelectedGround.ToString(), "Informace o revíru");
+        }
+
+
+
 
         private bool CanShowEditWindow(object obj)
         {

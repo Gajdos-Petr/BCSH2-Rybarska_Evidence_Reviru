@@ -179,7 +179,10 @@ namespace Rybarska_Evidence.Models
 
         public override string? ToString()
         {
-            return Id.ToString() + Name;
+            return $"Číslo revíru: {Number}\nNázev revíru: {Name}\nČíslo podrevíru: {PositionNumber}\nNázev podrevíru: {PositionName}\nTyp: {GeoundsType}\nVelikost: {Size}\nPopis:\n{Description}";
         }
+
+
+
     }
 }

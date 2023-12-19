@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="Rybarska_Evidence.Views.UserControls.Catches"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Rybarska_Evidence.Views.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+ 
+
+    <Grid Background="Transparent" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+
+            <Button Height="30" Width="120" Content=" VYTVOŘIT " Command="{Binding ShowAddWindowCommand}" Margin="10,0,10,0"/>
+            <Button Height="30" Width="120" Content=" ODEBRAT "  Command="{Binding   RemoveCatchCommand}" Margin="10,0,10,0"/>
+            <Button Height="30" Width="120" Content=" UPRAVIT " />
+          
+        </StackPanel >
+        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding Catches}" SelectedValue="{Binding SelectedCatch}" FontFamily="Bahnschrift" >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding GroundNumber}" Header="Číslo revíru" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Visit, StringFormat='dd.MM.yyyy'}" Header="Datum" Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishOne.FishName}" Header="Druh ryby" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishOne.Lenght}" Header="Délka" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishOne.Weight}" Header="Váha" Width="80"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishTwo.FishName}" Header="Druh ryby" Width="120"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishTwo.Lenght}" Header="Délka" Width="60"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding FishTwo.Weight}" Header="Váha" Width="80"/>
+
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</UserControl>

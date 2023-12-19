@@ -29,8 +29,11 @@
             <DataTemplate DataType="{x:Type viewModel:MembersViewModel}">
                 <userControl:Members/>
             </DataTemplate>
-            
-            
+
+
+            <DataTemplate DataType="{x:Type viewModel:CatchViewModel}">
+                <userControl:Catches/>
+            </DataTemplate>
         </ResourceDictionary>
         
     

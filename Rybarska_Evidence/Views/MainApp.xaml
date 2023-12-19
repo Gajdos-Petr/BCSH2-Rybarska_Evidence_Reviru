@@ -37,7 +37,7 @@
                         <!--<RadioButton Content="DOMŮ" Style="{StaticResource MenuButtonRes}" IsChecked="True" Command="{Binding HomeViewCommand}"/>-->
                         <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
-                        <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" />
+                        <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" Command="{Binding CatchesViewCommand}"/>
                         <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="ČLENOVÉ" Style="{StaticResource MenuButtonRes}"  Command="{Binding MembersViewCommand}" />
 
 

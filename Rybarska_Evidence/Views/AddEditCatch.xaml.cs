@@ -10,19 +10,23 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace Rybarska_Evidence.Views.UserControls
 {
     /// <summary>
-    /// Interakční logika pro Catch.xaml
+    /// Interakční logika pro AddEditCatch.xaml
     /// </summary>
-    public partial class Catch : UserControl
+    public partial class AddEditCatch : Window
     {
-        public Catch()
+        public AddEditCatch()
         {
             InitializeComponent();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

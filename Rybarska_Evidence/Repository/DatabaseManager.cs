@@ -37,6 +37,19 @@ namespace Rybarska_Evidence.Db
                 return new ObservableCollection<T>(collection.FindAll());
         }
 
+
+        public ObservableCollection<Catch> LoadCatches(int memberId)
+        {
+
+
+            List<Catch> allCatches = LoadData().ToList().Cast<Catch>().ToList();
+            // Použijeme Where metodu na kolekci pro filtraci
+            var filteredCatches = new ObservableCollection<Catch>(allCatches.FindAll(c => c.MemberId == memberId));
+
+            // Vrátíme filtrovanou kolekci
+            return filteredCatches;
+        }
+
         public void AddNewItemToDatabase(T item)
         {
             Type foudnedType = typeof(T);
@@ -46,9 +59,10 @@ namespace Rybarska_Evidence.Db
                     collection.Insert(item);
                     Member memberSa = item as Member;
                     var collectionLogins = db.GetCollection<Models.MemberLogin>("logins");
-                    var newLogin = new Models.MemberLogin { LoginIdentifier = memberSa.MemberId, Password = "heslo" };
+                    string password = GeneratePassword();
+                    var newLogin = new Models.MemberLogin { LoginIdentifier = memberSa.MemberId, Password = password };
                     collectionLogins.Insert(newLogin);
-
+                    MessageBox.Show($"Byl přidán nový člen {memberSa.FirstName}  {memberSa.LastName} \nID: {memberSa.MemberId}\nHeslo: {password}");
                     break;
 
                 case "FishingGrounds":
@@ -106,11 +120,27 @@ namespace Rybarska_Evidence.Db
                         }
                         break;
 
+                    case "Catch":
+                        Catch c = t as Catch;
+                        Catch catchToRemove = item as Catch;
+                        if (c.Id != catchToRemove.Id)
+                        {
+                            collection.Insert(t);
+                        }
+                        break;
+
                 }
             }
 
 
 
+        }
+
+
+        public List<int> LoadGroundNumbers(Func<T, int> nameSelector)
+        {
+            var names = collection.FindAll().Select(nameSelector).ToList();
+            return names;
         }
 
         public void DeleteLoginTest()
@@ -144,6 +174,11 @@ namespace Rybarska_Evidence.Db
                         break;
 
                     case "FishingGrounds":
+                        idProperty = typeof(T).GetProperty("Id");
+
+                        break;
+
+                    case "Catch":
                         idProperty = typeof(T).GetProperty("Id");
 
                         break;
@@ -190,6 +225,19 @@ namespace Rybarska_Evidence.Db
             {
                 db?.Dispose();
             }
+        }
+
+        private string GeneratePassword()
+        {
+            int length = 12;
+            const string valid = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            StringBuilder res = new StringBuilder();
+            Random rnd = new Random();
+            while (0 < length--)
+            {
+                res.Append(valid[rnd.Next(valid.Length)]);
+            }
+            return res.ToString();
         }
 
     }
