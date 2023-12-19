@@ -37,13 +37,14 @@ namespace Rybarska_Evidence.ViewModel
         
         private bool CanAddNewMember(object obj)
         {
-            // Ověření, zda jsou vyplněna povinná pole a správná data
-            bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
-            bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
-            bool isDateOfBirthValid = SelectedMember.DateOfBirth < DateTime.Now;
-            bool isLicenseValid = SelectedMember.DateOfBirth > DateTime.Now;
+            //// Ověření, zda jsou vyplněna povinná pole a správná data
+            //bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
+            //bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
+            //bool isDateOfBirthValid = SelectedMember.DateOfBirth < DateTime.Now;
+            //bool isLicenseValid = SelectedMember.DateOfBirth > DateTime.Now;
 
-            return isFirstNameValid && isLastNameValid && isDateOfBirthValid && isLicenseValid;
+            //return isFirstNameValid && isLastNameValid && isDateOfBirthValid && isLicenseValid;
+            return true;
         }
 
 
