@@ -29,24 +29,21 @@ namespace Rybarska_Evidence.ViewModel
             CancelAddNewMemberCommand = new RelayCommand(CancelWindow, CanCancel);
             Permits = Enum.GetValues(typeof(PermitType)).Cast<PermitType>().ToList();
             TypesMembers = Enum.GetValues(typeof(MemberType)).Cast<MemberType>().ToList();
+            StickerChoose = new List<bool> { true, false };
             DatabaseManager = new DatabaseManager<Member>("members");
 
             SelectedMember = new Member { DateOfBirth = DateTime.Now, Document = new Document {License = DateTime.Now } };
         }
-
+        
         private bool CanAddNewMember(object obj)
         {
-            // Ověření, zda jsou vyplněna povinná pole
+            // Ověření, zda jsou vyplněna povinná pole a správná data
             bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
             bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
-            //bool isDateOfBirthValid = NewMemberToAdd.DateOfBirth.;
-            //bool isLicenseValid = NewMemberToAdd.Document.License.HasValue;
-           // bool isPermitTypeValid = NewMemberToAdd.Document.TypeOfPermit != PermitType.Zadna; // Upravte podle vašich pravidel
+            bool isDateOfBirthValid = SelectedMember.DateOfBirth < DateTime.Now;
+            bool isLicenseValid = SelectedMember.DateOfBirth > DateTime.Now;
 
-            // Logika pro ověření dalších podmínek
-
-            // Celkové zhodnocení, zda můžete přidat nového člena
-            return isFirstNameValid && isLastNameValid ;
+            return isFirstNameValid && isLastNameValid && isDateOfBirthValid && isLicenseValid;
         }
 
 
@@ -102,6 +99,9 @@ namespace Rybarska_Evidence.ViewModel
         public List<PermitType> Permits { get; set; }
 
         public List<MemberType> TypesMembers { get; set; }
+
+        public List<bool> StickerChoose { get; set; }
+
 
 
     }

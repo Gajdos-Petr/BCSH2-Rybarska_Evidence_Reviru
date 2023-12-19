@@ -40,16 +40,39 @@
 
 
                 </Grid.RowDefinitions>
-                <StackPanel Margin="10,0,10,0">
+                <StackPanel Margin="10,0,10,0" Grid.Row="0" Grid.Column="0">
                     <TextBlock Text="Jméno"/>
                     <TextBox Grid.Row="0" Grid.Column="0" Margin="0,10,0,0" Text="{Binding SelectedMember.FirstName}" Height="35" FontFamily="Bahnschrift" />
                 </StackPanel>
-                <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding SelectedMember.LastName}" Margin="25" FontFamily="Bahnschrift"/>
-                <DatePicker Grid.Row="1"  Grid.Column="0" SelectedDate="{Binding SelectedMember.DateOfBirth}" Margin="25" FontFamily="Bahnschrift"/>
-                <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesMembers}" SelectedItem="{Binding SelectedMember.MemberType}" Margin="25" />
-                <DatePicker  Grid.Row="2"  Grid.Column="0" SelectedDate="{Binding SelectedMember.Document.License}" Margin="25"/>
-                <TextBox Grid.Row="2"  Grid.Column="1" Margin="25"/>
-                <ComboBox Grid.Row="3"  Grid.Column="0" ItemsSource="{Binding Permits}" SelectedItem="{Binding SelectedMember.Document.TypeOfPermit}" Margin="25"/>
+                <StackPanel Margin="10,0,10,0" Grid.Row="0" Grid.Column="1" >
+                    <TextBlock Text="Příjmení"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="0,10,0,0" Text="{Binding SelectedMember.LastName}" Height="35" FontFamily="Bahnschrift"/>
+                </StackPanel>
+            <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="0" >
+                <TextBlock Text="Datum narození"/>
+                    <DatePicker Grid.Row="1"  Grid.Column="0" SelectedDate="{Binding SelectedMember.DateOfBirth}" Margin="0,10,0,0" Height="35" FontFamily="Bahnschrift"/>
+                </StackPanel>
+                <StackPanel Margin="10,0,10,0" Grid.Row="1" Grid.Column="1" >
+                    <TextBlock Text="Pozice"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding TypesMembers}" SelectedItem="{Binding SelectedMember.MemberType}" Margin="0,10,0,0" Height="35" />
+                </StackPanel>
+
+                <StackPanel Margin="10,0,10,0" Grid.Row="2" Grid.Column="0" >
+                    <TextBlock Text="Platnost lístku"/>
+                    <DatePicker  Grid.Row="2"  Grid.Column="0" SelectedDate="{Binding SelectedMember.Document.License}" Margin="0,10,0,0" Height="35"/>
+                </StackPanel>
+
+                <StackPanel Margin="10,0,10,0" Grid.Row="2" Grid.Column="1" >
+                    <TextBlock Text="Zakoupena známka"/>
+                    <ComboBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding StickerChoose}" SelectedItem="{Binding SelectedMember.Document.Sticker}" Margin="0,10,0,0" Height="35" />
+
+
+                </StackPanel>
+                <StackPanel Margin="10,0,10,0" Grid.Row="3" Grid.Column="0" >
+                    <TextBlock Text="Velikost revíru"/>
+                    <ComboBox Grid.Row="3"  Grid.Column="0" ItemsSource="{Binding Permits}" SelectedItem="{Binding SelectedMember.Document.TypeOfPermit}" Margin="0,10,0,0" Height="35"/>
+
+                </StackPanel>
 
             </Grid>
 

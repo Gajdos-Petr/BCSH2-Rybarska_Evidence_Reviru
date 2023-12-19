@@ -22,6 +22,9 @@ namespace Rybarska_Evidence.ViewModel
 
         public RelayCommand RemoveCatchCommand { get; set; }
 
+        public RelayCommand EditCatchCommand { get; set; }
+
+
         private DatabaseManager<Catch> DatabaseManager { get; set; }
 
         public Catch SelectedCatch { get; set; }
@@ -40,9 +43,21 @@ namespace Rybarska_Evidence.ViewModel
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
             RemoveCatchCommand = new RelayCommand(RemoveCatch, CanRemoveCatch);
+            EditCatchCommand = new RelayCommand(EditCatch, CanRemoveCatch);
 
         }
 
+
+        private void EditCatch(object obj)
+        {
+            //EditGroundViewModel editGroundViewModel = new EditGroundViewModel(SelectedGround);
+            //AddEditGround addEditGroundWindow = new AddEditGround { DataContext = editGroundViewModel };
+            //addEditGroundWindow.Show();
+            EditCatchViewModel editCatchViewModel = new EditCatchViewModel(SelectedCatch);
+            AddEditCatch addEditCatchWidnow = new AddEditCatch {DataContext = editCatchViewModel };
+            addEditCatchWidnow.Show();
+            DatabaseManager.Dispose();
+        }
 
         private bool CanRemoveCatch(object obj) { return SelectedCatch != null; }
 
@@ -74,7 +89,10 @@ namespace Rybarska_Evidence.ViewModel
         }
 
 
-
+        public Visibility AdminButtonsVisibility
+        {
+            get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
+        }
 
     }
 }

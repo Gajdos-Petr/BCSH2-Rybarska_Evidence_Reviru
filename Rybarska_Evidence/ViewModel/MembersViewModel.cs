@@ -17,11 +17,28 @@ using System.Windows.Input;
 
 namespace Rybarska_Evidence.ViewModel
 {
-  public  class MembersViewModel
+  public  class MembersViewModel : ObservableObject
     {
-  
 
+        private string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                    ApplyFilter(null);
+                }
+            }
+        }
         public static ObservableCollection<Member> Members { get; set; }
+
+        public static ObservableCollection<Member> MemberslOriginal { get; set; }
+
+        public RelayCommand SearchCommand { get; set; }
 
         private DatabaseManager<Member> DatabaseManager { get; set; }
 
@@ -36,11 +53,15 @@ namespace Rybarska_Evidence.ViewModel
         {
             DatabaseManager = new DatabaseManager<Member>("members");
             Members = DatabaseManager.LoadData();
+            MemberslOriginal = DatabaseManager.LoadData();
             DatabaseManager.Dispose();
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
             ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditWindow);
             RemoveMemberCommand = new RelayCommand(RemoveMember, CanRemoveMember);
+            SearchCommand = new RelayCommand(ApplyFilter, CanApply);
+
+
         }
 
 
@@ -120,6 +141,40 @@ namespace Rybarska_Evidence.ViewModel
         private bool IsDatabaseConnected()
         {
             return DatabaseManager != null;
+        }
+
+        private bool CanApply(object obj)
+        {
+            return true;
+        }
+
+        private void ApplyFilter(object obj)
+        {
+            if (SearchText.Length == 0)
+            {
+                Members.Clear() ;
+                foreach (var item in MemberslOriginal)
+                {
+                    Members.Add(item);
+                }
+            }
+            else
+            {
+
+                
+                var filteredGrounds = Members
+                .Where(item => item.LastName.Contains(SearchText))
+    .ToList();
+
+                Members.Clear();
+                foreach (var item in filteredGrounds)
+                {
+                    Members.Add(item);
+                }
+
+            }
+
+
         }
     }
 }

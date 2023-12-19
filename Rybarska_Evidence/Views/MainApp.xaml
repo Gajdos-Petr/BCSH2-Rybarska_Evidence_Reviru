@@ -21,7 +21,7 @@
             </Grid.RowDefinitions>
 
             <!--LEFT MENU BAR-->
-            <Border Grid.Row="1" Grid.Column="0" Background="#3AAFA9" CornerRadius="20,0,0,20">
+            <Border Grid.Row="1" Grid.Column="0" Background="#86C232" CornerRadius="20,0,0,20">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="200"/>
@@ -51,7 +51,7 @@
                     <RowDefinition Height="5*"/>
                     <RowDefinition Height="70*"/>
                 </Grid.RowDefinitions>
-                <Border Background="#3AAFA9">
+                <Border >
                 <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
                     <Button Width="80" Content="MIN"/>
                     <Button Width="80" Content="MAX"/>

@@ -12,11 +12,16 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10" >
+            <TextBox Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"  Width="150"  Height="30" Margin="10,0,10,0">
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
+                </TextBox.InputBindings>
+            </TextBox>
             <Button Height="30" Width="120" Content=" PŘIDAT ČLENA" Command="{Binding ShowAddWindowCommand}"/>
             <Button Height="30" Width="120" Content=" ODEBRAT ČLENA" Command="{Binding RemoveMemberCommand}" Margin="10,0,10,0"/>
             <Button Height="30" Width="120" Content=" UPRAVIT ČLENA" Command="{Binding ShowEditWindowCommand}"/>
-
+         
         </StackPanel >
         <ListView Grid.Row="1" Name="MemberList" Margin="10"  ItemsSource="{Binding Members}"  SelectedValue="{Binding SelectedMember}">
             <ListView.View>

@@ -19,12 +19,32 @@ using System.Printing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using static System.Formats.Asn1.AsnWriter;
 
 namespace Rybarska_Evidence.ViewModel
 {
   public class GroundsViewModel : ObservableObject
     {
+
+
+        private string searchText;
+        public string SearchText
+        {
+            get { return searchText; }
+            set
+            {
+                if (searchText != value)
+                {
+                    searchText = value;
+                    OnPropertyChanged(nameof(SearchText));
+                    ApplyFilter(null);
+                }
+            }
+        }
+
+
+        public RelayCommand SearchCommand { get; set; }
 
         public RelayCommand ShowAddWindowCommand { get; set; }
 
@@ -39,19 +59,21 @@ namespace Rybarska_Evidence.ViewModel
 
 
         public static ObservableCollection<FishingGrounds> FishingGroundsColl { get; set; }
+        public static ObservableCollection<FishingGrounds> FishingGroundsCollOriginal { get; set; }
 
         public RelayCommand RemoveGroundCommand { get; set; }
         public GroundsViewModel()
         {
             DatabaseManager = new DatabaseManager<FishingGrounds>("grounds");
             FishingGroundsColl = DatabaseManager.LoadData();
+            FishingGroundsCollOriginal = DatabaseManager.LoadData();
             DatabaseManager.Dispose();
 
             ShowAddWindowCommand = new RelayCommand(ShowAddWindow, CanShowAddWindow);
             RemoveGroundCommand = new RelayCommand(RemoveGround, CanRemoveGround);
             ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditWindow);
-            ShowInfoWindowCommand = new RelayCommand(ShowInfo, CanShowAddWindow);
-
+            ShowInfoWindowCommand = new RelayCommand(ShowInfo, CanShowEditWindow);
+            SearchCommand = new RelayCommand(ApplyFilter, CanApply);
         }
 
         private void ShowInfo(object obj)
@@ -61,7 +83,10 @@ namespace Rybarska_Evidence.ViewModel
 
 
 
-
+        private bool CanApply(object obj)
+        {
+            return true;
+        }
         private bool CanShowEditWindow(object obj)
         {
             return SelectedGround != null;
@@ -116,6 +141,42 @@ namespace Rybarska_Evidence.ViewModel
         {
             get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
         }
+
+
+
+
+        private void ApplyFilter(object obj)
+        {
+            if (SearchText.Length == 0)
+            {
+                //FishingGroundsColl = FishingGroundsCollOriginal;
+                FishingGroundsColl.Clear();
+                foreach (var item in FishingGroundsCollOriginal)
+                {
+                    FishingGroundsColl.Add(item);
+                }
+            }
+            else
+            {
+
+                int text = int.Parse(SearchText);
+                var filteredGrounds = FishingGroundsColl
+                .Where(item => item.Number.ToString().Contains(text.ToString()))
+    .ToList();
+
+                FishingGroundsColl.Clear();
+                foreach (var item in filteredGrounds)
+                {
+                    FishingGroundsColl.Add(item);
+                }
+
+            }
+
+
+        }
+
+
+
     }
 }
 

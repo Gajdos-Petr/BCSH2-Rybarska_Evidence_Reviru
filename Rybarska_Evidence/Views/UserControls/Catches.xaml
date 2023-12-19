@@ -17,8 +17,8 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
 
             <Button Height="30" Width="120" Content=" VYTVOŘIT " Command="{Binding ShowAddWindowCommand}" Margin="10,0,10,0"/>
-            <Button Height="30" Width="120" Content=" ODEBRAT "  Command="{Binding   RemoveCatchCommand}" Margin="10,0,10,0"/>
-            <Button Height="30" Width="120" Content=" UPRAVIT " />
+            <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" ODEBRAT "  Command="{Binding RemoveCatchCommand}" Margin="10,0,10,0"/>
+            <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" UPRAVIT " Command="{Binding EditCatchCommand}" />
           
         </StackPanel >
         <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding Catches}" SelectedValue="{Binding SelectedCatch}" FontFamily="Bahnschrift" >
