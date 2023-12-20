@@ -21,6 +21,7 @@ namespace Rybarska_Evidence.ViewModel
 
         public RelayCommand CatchesViewCommand { get; set; }
 
+        public RelayCommand StatsViewCommand { get; set; }
 
 
         //public HomeViewModel HomeVM { get; set; }
@@ -36,6 +37,7 @@ namespace Rybarska_Evidence.ViewModel
         public CatchViewModel CatchVM { get; set; }
 
 
+        public StatsViewModel StatsVM { get; set; }
 
         private object _currentView;
 
@@ -71,6 +73,9 @@ namespace Rybarska_Evidence.ViewModel
               
             }, _ => true);
 
+
+       
+
             GroundsViewCommand = new RelayCommand(o =>
             {
                 GroundsVM = new GroundsViewModel();
@@ -85,7 +90,7 @@ namespace Rybarska_Evidence.ViewModel
             }, _ => true);
 
 
-
+ 
 
             MembersViewCommand = new RelayCommand(o =>
             {
@@ -95,6 +100,20 @@ namespace Rybarska_Evidence.ViewModel
             }, _ => true);
 
 
+            StatsViewCommand = new RelayCommand(o =>
+            {
+
+                StatsVM = new StatsViewModel();
+                CurrentView = StatsVM;
+
+            }, _ => true);
+
+            //StatsViewCommand = new RelayCommand(o =>
+            //{
+            //    StatsVM = new StatsViewModel();
+            //    CurrentView = StatsVM;
+
+            //}, _ => true);
         }
 
         public  Visibility AdminButtonsVisibility

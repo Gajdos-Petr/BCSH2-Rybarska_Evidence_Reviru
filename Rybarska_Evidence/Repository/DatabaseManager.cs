@@ -240,5 +240,31 @@ namespace Rybarska_Evidence.Db
             return res.ToString();
         }
 
+
+
+
+        public void LoadStats()
+        {
+
+
+     
+            int nejcastejsi = GetMostFrequentGroundNumber(LoadData().ToList().Cast<Catch>().ToList());
+            MessageBox.Show(nejcastejsi.ToString());
+        }
+
+      private  int GetMostFrequentGroundNumber(List<Catch> catches)
+        {
+            // Použití LINQ pro získání nejčastěji se vyskytujícího revíru.
+            var mostFrequentGroundNumber = catches
+                .GroupBy(c => c.GroundNumber)
+                .OrderByDescending(group => group.Count())
+                .Select(group => group.Key)
+                .FirstOrDefault();
+
+            return mostFrequentGroundNumber;
+        }
     }
+
+
 }
+

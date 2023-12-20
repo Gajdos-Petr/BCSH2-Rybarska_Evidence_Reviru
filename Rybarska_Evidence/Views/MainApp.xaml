@@ -39,8 +39,9 @@
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" Command="{Binding CatchesViewCommand}"/>
                         <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="ČLENOVÉ" Style="{StaticResource MenuButtonRes}"  Command="{Binding MembersViewCommand}" />
+                        <RadioButton  Visibility="{Binding AdminButtonsVisibility}" Content="STATISTIKY" Style="{StaticResource MenuButtonRes}"  Command="{Binding StatsViewCommand}" />
 
-
+                        
                     </StackPanel>
 
                 </Grid>

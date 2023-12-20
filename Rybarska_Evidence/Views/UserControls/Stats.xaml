@@ -16,7 +16,7 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="DOKUMENTY ČLENA" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
+            <TextBlock Text="STATISTIKY REVÍRŮ" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -29,9 +29,9 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="PLATNOST RYBÁŘSKÉHO LÍSTKU" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
+                        <TextBlock Text="NEJNAVŠTĚVOVANĚJŠÍ REVÍR" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
                         <StackPanel Grid.Row="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentLogedMember.Document.License,  StringFormat='dd.MM.yyyy'}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Stat.Ground}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -42,9 +42,9 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="RYBÁŘSKÁ ZNÁMKA" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
+                        <TextBlock Text="CELKOVÁ ODNENESÁ HMOTNOST [KG]" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
                         <StackPanel Grid.Row="1"  Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentLogedMember.Document.StickerText}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Stat.TotalWeght}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
 
@@ -59,7 +59,6 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBlock Text="DOKUMENTY ČLENA" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
             <Grid Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -72,9 +71,9 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="PLATNOST RYBÁŘSKÉHO LÍSTKU" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
+                        <TextBlock Text="NEČASTĚJI ULOVENÁ RYBA" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
                         <StackPanel Grid.Row="1" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentLogedMember.Document.License,  StringFormat='dd.MM.yyyy'}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Stat.Fish}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -85,9 +84,9 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="RYBÁŘSKÁ ZNÁMKA" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
+                        <TextBlock Text="NEJVĚTŠÍ VELIKOST" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
                         <StackPanel Grid.Row="1"  Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding CurrentLogedMember.Document.StickerText}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Stat.Size}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
 

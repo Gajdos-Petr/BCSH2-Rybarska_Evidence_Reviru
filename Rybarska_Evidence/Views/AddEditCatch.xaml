@@ -101,7 +101,7 @@ AllowsTransparency="True">
 
                     </Grid.ColumnDefinitions>
                     <Button Grid.Column="0" Content="ZPĚT" Command="{Binding CancelCommand}" Width="200" Height="40" FontFamily="Bahnschrift" Click="Button_Click"/>
-                    <Button Grid.Column="1" Content="PŘIDAT" Command="{Binding AddCatchCommand}" Width="200" Height="40" FontFamily="Bahnschrift"/>
+                    <Button Grid.Column="1" Content="POTVRDIT" Command="{Binding AddCatchCommand}" Width="200" Height="40" FontFamily="Bahnschrift"/>
                 </Grid>
 
             </Border>

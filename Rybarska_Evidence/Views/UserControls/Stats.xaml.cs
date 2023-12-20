@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Rybarska_Evidence.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,9 @@ namespace Rybarska_Evidence.Views.UserControls
         public Stats()
         {
             InitializeComponent();
+
+            StatsViewModel statsViewModel= new StatsViewModel();
+            DataContext = statsViewModel;
         }
     }
 }
