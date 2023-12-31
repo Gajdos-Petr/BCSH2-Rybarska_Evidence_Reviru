@@ -25,6 +25,8 @@ namespace Rybarska_Evidence.ViewModel.Edit
             CancelAddNewMemberCommand = new RelayCommand(CancelWindow, CanCancel);
             Permits = Enum.GetValues(typeof(PermitType)).Cast<PermitType>().ToList();
             TypesMembers = Enum.GetValues(typeof(MemberType)).Cast<MemberType>().ToList();
+            StickerChoose = new List<bool> { true, false };
+
             SelectedMember = memberForEdit;
         }
         private bool CanAddNewMember(object obj)
@@ -57,6 +59,7 @@ namespace Rybarska_Evidence.ViewModel.Edit
         public List<PermitType> Permits { get; set; }
 
         public List<MemberType> TypesMembers { get; set; }
+        public List<bool> StickerChoose { get; set; }
 
     }
 }

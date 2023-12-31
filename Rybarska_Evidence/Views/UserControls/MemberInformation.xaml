@@ -13,9 +13,9 @@
         </Grid.ColumnDefinitions>
         <Grid Grid.Column="0" Margin="20">
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="45*"/>
+                <RowDefinition Height="45*"/>
             </Grid.RowDefinitions>
             <TextBlock Text="ÚDAJE ČLENA" FontFamily="Bahnschrift" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="28" Margin="10,0,0,0"/>
             <!--LEFT JMENO, DATUM NAROZENI-->
@@ -32,10 +32,11 @@
             <!--LEFT POZICE-->
             <Border Grid.Row="2" CornerRadius="10" Background="#86C232" Margin="10" >
                 <StackPanel Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-
                     <TextBlock Text="{Binding CurrentLogedMember.MemberType}" FontFamily="Bahnschrift" Foreground="White"  Margin="0,0,0,10" FontSize="36"/>
                 </StackPanel>
             </Border>
+
+    
         </Grid>
 
         <Grid Grid.Column="1" Margin="20">

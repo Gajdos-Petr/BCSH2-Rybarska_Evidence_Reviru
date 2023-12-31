@@ -21,8 +21,8 @@ namespace Rybarska_Evidence.Model
         private DateTime birthDay;
         private string firstName;
         private string lastName;
+        private string adress;
         private MemberType type;
-        private Document doc;
 
         public int MemberId
         {
@@ -41,7 +41,7 @@ namespace Rybarska_Evidence.Model
 
 
             }
-        }   
+        }
         public string FirstName
         {
             get
@@ -74,6 +74,23 @@ namespace Rybarska_Evidence.Model
             }
         }
 
+        public string Adress
+        {
+            get
+            {
+                return adress;
+            }
+            set
+            {
+                if (adress != value)
+                {
+                    adress = value;
+                    OnPropertyChanged(nameof(adress));
+                }
+            }
+        }
+
+
         public DateTime DateOfBirth {
             get
             {
@@ -84,7 +101,7 @@ namespace Rybarska_Evidence.Model
                 SetProperty(ref birthDay, value);
                 OnPropertyChanged(nameof(birthDay));
             }
-        
+
         }
 
         public MemberType MemberType
@@ -109,7 +126,7 @@ namespace Rybarska_Evidence.Model
         }
 
 
-
+    
         private void SetProperty(ref DateTime property, DateTime value, [CallerMemberName] string propertyName = null)
         {
             if (property != value)

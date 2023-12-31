@@ -29,7 +29,7 @@ namespace Rybarska_Evidence.ViewModel
         {
             AddGroundCommand = new RelayCommand(AddNewGround, CanAddNewGround);
             GroundTypes = Enum.GetValues(typeof(GeoundsType)).Cast<GeoundsType>().ToList();
-            SelectedGround = new FishingGrounds();
+            SelectedGround = new FishingGrounds { GeoLocations = new GeoLocation { Latitude = 0, Longitude = 0 } };
             CancelCommand = new RelayCommand(CancelWindow, CanCancel);
             DatabaseManager = new DatabaseManager<FishingGrounds>("grounds");
 
@@ -48,32 +48,54 @@ namespace Rybarska_Evidence.ViewModel
         }
         private bool CanAddNewGround(object obj)
         {
-            return true;
+            bool isGroundNameValid = !string.IsNullOrEmpty(SelectedGround.Name);
+            bool isSecondGroundNameValid = !string.IsNullOrEmpty(SelectedGround.PositionName);
+            return isGroundNameValid && isSecondGroundNameValid;
+
         }
 
         private void AddNewGround(object obj)
         {
-            //pridani do listu
-            GroundsViewModel.FishingGroundsColl.Add(new FishingGrounds
+
+            if (CheckGroundInformation())
             {
+                //pridani do listu
+                GroundsViewModel.FishingGroundsColl.Add(new FishingGrounds
+                {
 
-                Id = SelectedGround.Id = DatabaseManager.FindMaxId() + 1,
-                Number = SelectedGround.Number,
-                Name = SelectedGround.Name,
-                PositionNumber = SelectedGround.PositionNumber,
-                PositionName = SelectedGround.PositionName,
-                GeoundsType = SelectedGround.GeoundsType,
-                Size = SelectedGround.Size,
-                Description = SelectedGround.Description,
+                    Id = SelectedGround.Id = DatabaseManager.FindMaxId() + 1,
+                    Number = SelectedGround.Number,
+                    Name = SelectedGround.Name,
+                    PositionNumber = SelectedGround.PositionNumber,
+                    PositionName = SelectedGround.PositionName,
+                    GeoundsType = SelectedGround.GeoundsType,
+                    Size = SelectedGround.Size,
+                    Description = SelectedGround.Description,
+                    GeoLocations = new GeoLocation
+                    {
+                        Latitude = SelectedGround.GeoLocations.Latitude,
+                        Longitude = SelectedGround.GeoLocations.Longitude,
+                    }
+                });
+                //Pridat do databáze
 
-            });
-            //Pridat do databáze
-            MessageBox.Show(SelectedGround.Id.ToString());
+                DatabaseManager.AddNewItemToDatabase(SelectedGround);
+                ClearBoxes();
+            }
 
-            DatabaseManager.AddNewItemToDatabase(SelectedGround);
-            ClearBoxes();
+
+
         }
-
+        private bool CheckGroundInformation()
+        {
+            bool ok = true;
+            if (SelectedGround.Number <= 0 || SelectedGround.PositionNumber <= 0 || SelectedGround.Size <= 0 ) {
+                MessageBox.Show("Všechny číselné hodnoty musí být kladné!", "Chyba");
+                ok = false;
+            }
+        
+            return ok;
+        }
         private void ClearBoxes()
         {
             SelectedGround.Number = 0;

@@ -13,7 +13,9 @@ namespace Rybarska_Evidence.Models
         Mimopstruhovy
     }
 
-   public class FishingGrounds : ObservableObject
+   
+
+    public class FishingGrounds : ObservableObject
     {
         private int id;
         private int number;
@@ -23,6 +25,8 @@ namespace Rybarska_Evidence.Models
         private GeoundsType type;
         private double size;
         private string desc;
+        private GeoLocation geo;
+
 
 
 
@@ -138,7 +142,7 @@ namespace Rybarska_Evidence.Models
 
             }
         }
-
+        public GeoLocation GeoLocations { get; set; }
         public double Size
         {
             get

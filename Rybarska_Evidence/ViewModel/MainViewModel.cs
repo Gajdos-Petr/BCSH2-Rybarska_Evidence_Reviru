@@ -23,7 +23,10 @@ namespace Rybarska_Evidence.ViewModel
 
         public RelayCommand StatsViewCommand { get; set; }
 
+        public RelayCommand MemberStatsViewCommand { get; set; }
 
+
+        public string CurrentFishTime { get; set; }
         //public HomeViewModel HomeVM { get; set; }
 
 
@@ -38,6 +41,8 @@ namespace Rybarska_Evidence.ViewModel
 
 
         public StatsViewModel StatsVM { get; set; }
+
+        public MemberStatsViewModel MemberStatsVM { get; set; }
 
         private object _currentView;
 
@@ -56,7 +61,7 @@ namespace Rybarska_Evidence.ViewModel
             //HomeVM = new HomeViewModel();
            
             MemberInformationVM = new MemberInformationViewModel();
-
+            CurrentFishTime = GetCurrentTime();
 
 
             CurrentView = MemberInformationVM;
@@ -108,6 +113,15 @@ namespace Rybarska_Evidence.ViewModel
 
             }, _ => true);
 
+
+            MemberStatsViewCommand = new RelayCommand(o =>
+            {
+
+                MemberStatsVM = new MemberStatsViewModel();
+                CurrentView = MemberStatsVM;
+
+            }, _ => true);
+
             //StatsViewCommand = new RelayCommand(o =>
             //{
             //    StatsVM = new StatsViewModel();
@@ -119,6 +133,25 @@ namespace Rybarska_Evidence.ViewModel
         public  Visibility AdminButtonsVisibility
         {
             get { return MemberInformationViewModel.CurrentLogedMember.MemberType is MemberType.Vedeni ? Visibility.Visible : Visibility.Collapsed; }
+        }
+
+
+        private string GetCurrentTime()
+        {
+            string currentDateToReturn = string.Empty;
+            DateTime currentDate = DateTime.Now;
+
+            bool isAprilToSeptember = currentDate.Month >= 4 && currentDate.Month <= 9 && currentDate.Hour >= 4 && currentDate.Hour <= 24;
+            bool isOctoberToMarch = currentDate.Month >= 10 || currentDate.Month <= 3 && currentDate.Hour >= 5 && currentDate.Hour <= 22;
+            if (isAprilToSeptember)
+            {
+                currentDateToReturn = "od 4 do 24 hodin.";
+            }
+            else if (isOctoberToMarch)
+            {
+                currentDateToReturn = "od 5 do 22 hodin.";
+            }
+            return currentDateToReturn;
         }
     }
 }

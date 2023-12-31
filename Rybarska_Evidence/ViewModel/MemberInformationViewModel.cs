@@ -2,6 +2,7 @@
 using Rybarska_Evidence.Model;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,35 @@ using System.Windows;
 
 namespace Rybarska_Evidence.ViewModel
 {
-  public  class MemberInformationViewModel
+
+  public  class MemberInformationViewModel : ObservableObject
     {
-      
+
+        public RelayCommand ShowPasswordCommand { get; set; }
+
+
+        private string pass;
+        public string PasswordForShow
+        {
+            get
+            {
+                return pass;
+            }
+            set
+            {
+                if (pass != value)
+                {
+                    pass = value;
+                    OnPropertyChanged(nameof(pass));
+                }
+            }
+        }
+
+
         public MemberInformationViewModel()
 
         {
-
-
+            ShowPasswordCommand = new RelayCommand(ShowPassword, CanShowPassword);
             //CurrentLogedMember = new Member
             //{
             //    MemberId = 1,
@@ -49,6 +71,18 @@ namespace Rybarska_Evidence.ViewModel
 
         public static Member CurrentLogedMember { get; set; }
 
-     
+        private bool CanShowPassword(object obj)
+        {
+            return true;
+
+        }
+
+
+        private  void ShowPassword(object obj)
+        {
+
+           
+        }
+
     }
 }

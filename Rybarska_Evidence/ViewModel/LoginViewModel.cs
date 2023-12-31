@@ -44,6 +44,7 @@ namespace Rybarska_Evidence.ViewModel
             {
                 DatabaseManager<Member> db = new DatabaseManager<Member>("members");
                 LoginService.CurrentLogedMember = db.GetItemFromDatabase(NewLogin.LoginIdentifier);
+                LoginService.Password = NewLogin.Password;
                 db.Dispose();
                 MainApp mainApp = new MainApp();
                 mainApp.Show();

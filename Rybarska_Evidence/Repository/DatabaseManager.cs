@@ -29,7 +29,13 @@ namespace Rybarska_Evidence.Db
       
             collection = db.GetCollection<T>(collectionName);
         }
-  
+
+        public DatabaseManager()
+        {
+            string _BaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+
+            db = new LiteDatabase(Path.GetFullPath(Path.Combine(_BaseDirectory, @"..\..\..\..\Db\FishingData.db")));
+        }
 
         public ObservableCollection<T> LoadData()
         {
@@ -52,6 +58,7 @@ namespace Rybarska_Evidence.Db
 
         public void AddNewItemToDatabase(T item)
         {
+       
             Type foudnedType = typeof(T);
             switch (foudnedType.Name)
             {
@@ -243,17 +250,13 @@ namespace Rybarska_Evidence.Db
 
 
 
-        public void LoadStats()
+
+      public  int GetMostFrequentGroundNumber()
         {
 
-
-     
-            int nejcastejsi = GetMostFrequentGroundNumber(LoadData().ToList().Cast<Catch>().ToList());
-            MessageBox.Show(nejcastejsi.ToString());
-        }
-
-      private  int GetMostFrequentGroundNumber(List<Catch> catches)
-        {
+            var conn = db.GetCollection<Catch>("catches");
+            List<Catch> catches = conn.FindAll().ToList();
+            
             // Použití LINQ pro získání nejčastěji se vyskytujícího revíru.
             var mostFrequentGroundNumber = catches
                 .GroupBy(c => c.GroundNumber)
@@ -263,6 +266,158 @@ namespace Rybarska_Evidence.Db
 
             return mostFrequentGroundNumber;
         }
+
+
+
+        public StatsMember GetMemberStats(int memberId)
+        {
+            StatsMember stats = new StatsMember();
+            var conn = db.GetCollection<Catch>("catches");
+            List<Catch> memberCatches= conn.Find(c => c.MemberId == memberId).ToList();
+            stats.CountOfVisits = memberCatches.Count();
+
+
+            var fishGroups = memberCatches
+                .SelectMany(c => new[] { c.FishOne, c.FishTwo }) // Sloučení všech ryb do jednoho seznamu
+                .Where(fish => fish.FishName != "-")                      // Odstranění potenciálních null hodnot
+                .GroupBy(fish => fish.FishName)                   // Seskupení podle názvu ryby
+                .OrderByDescending(group => group.Count());       // Seřazení podle počtu ulovených ryb sestupně
+
+            var mostCaughtFishGroup = fishGroups.FirstOrDefault();
+
+            string mostCaughtFishName = mostCaughtFishGroup?.Key;
+            if (string.IsNullOrEmpty(mostCaughtFishName)) 
+            {
+                stats.MostCaughtFishName = "Zadna";
+            }
+            else
+            {
+            stats.MostCaughtFishName = mostCaughtFishName;
+
+            }
+            if (memberCatches.Any())
+            {
+                int mostFrequentGroundNumber = memberCatches          
+    .GroupBy(c => c.GroundNumber)
+    .OrderByDescending(group => group.Count())
+    .Select(group => group.Key)
+    .First();
+                stats.MostFrequentGroundNumber = mostFrequentGroundNumber;
+
+            }
+            else
+            {
+                stats.MostFrequentGroundNumber = 0;
+            }
+            //TopThreeCatch(memberId);
+            return stats;
+        }
+
+        //public void TopThreeCatch(int memberId)
+        //{
+        //    var conn = db.GetCollection<Catch>("catches");
+        //    List<Catch> memberCatches = conn.Find(c => c.MemberId == memberId).ToList();
+        //    int numberForSort = 0;
+
+        //    if (memberCatches.Any())
+        //    {
+        //        if (memberCatches.Count > 3)
+        //        {
+        //            numberForSort = 3;
+        //        }
+        //        else
+        //        {
+        //            numberForSort = memberCatches.Count;
+        //        }
+        //        var top3GroundNumbers = memberCatches
+        //            .GroupBy(c => c.GroundNumber)
+        //            .OrderByDescending(group => group.Count())
+        //            .Take(numberForSort)
+        //            .Select(group => group.Key)
+        //            .ToList();
+
+
+        //        foreach (var groundNumber in top3GroundNumbers)
+        //        {
+        //            //Console.WriteLine($"GroundNumber: {groundNumber}");
+        //            //MessageBox.Show(groundNumber.ToString());
+        //        }
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Člen nemá žádné úlovky.");
+        //    }
+
+        //}
+        public List<Carry> GetTopThreeCatches(int memberId)
+        {
+            var conn = db.GetCollection<Catch>("catches");
+            List<Catch> memberCatches = conn.Find(c => c.MemberId == memberId).ToList();
+            int numberToGet = 0;
+
+            if (memberCatches.Count < 3)
+            {
+                numberToGet = memberCatches.Count;
+            }
+            else
+            {
+                numberToGet = 3;
+            }
+            
+
+            if (memberCatches.Any())
+            {
+                // Sjednocení úlovků FishOne a FishTwo do jednoho seznamu
+                var allCatches = memberCatches.SelectMany(c => new[] { c.FishOne, c.FishTwo })
+                                               .Where(fish => fish != null)
+                                               .ToList();
+
+                // Seřazení úlovků podle váhy sestupně a výběr prvních tří
+                var topThreeCatches = allCatches.OrderByDescending(c => c.Weight)
+                                               .Take(numberToGet)
+                                               .ToList();
+
+                return topThreeCatches;
+            }
+            else
+            {
+                MessageBox.Show("Člen nemá žádné úlovky.");
+                return new List<Carry>();
+            }
+        }
+
+
+
+        public ObservableCollection<Models.Stats> GetStatsForGrounds()
+        {
+            ObservableCollection<Models.Stats> statsCollection = new ObservableCollection<Models.Stats>();
+
+            var conn = db.GetCollection<Catch>("catches");
+            List<Catch> catchesToSort = conn.FindAll().ToList();
+
+            var groundsGrouped = catchesToSort
+                .GroupBy(c => c.GroundNumber)
+                .ToList();
+
+            foreach (var group in groundsGrouped)
+            {
+                int groundNumber = group.Key;
+
+                Models.Stats stats = new Models.Stats
+                {
+                    Ground = groundNumber.ToString(), // Změňte podle struktury vaší databáze
+                    TotalWeight = group.Sum(c => (c.FishOne?.Weight ?? 0) + (c.FishTwo?.Weight ?? 0)),
+                    FishCount = group.Sum(c => (c.FishOne != null ? 1 : 0) + (c.FishTwo != null ? 1 : 0)).ToString(),
+                    TotalSize = group.Sum(c => (c.FishOne?.Lenght ?? 0) + (c.FishTwo?.Lenght ?? 0))
+                };
+
+                // Přidejte statistiky do kolekce
+                statsCollection.Add(stats);
+            }
+
+            return statsCollection;
+        }
+
     }
 
 

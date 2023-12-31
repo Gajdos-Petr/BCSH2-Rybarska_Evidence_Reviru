@@ -68,33 +68,53 @@ namespace Rybarska_Evidence.ViewModel.Edit
         private void AddNewCatch(object obj)
         {
 
-        
-            //pridani do listu
-            CatchViewModel.Catches.Add(new Catch
+            if (CheckCatchInformation())
             {
-                Id = SelectedCatch.Id = DatabaseManager.FindMaxId() + 1,
-                GroundNumber = SelectedCatch.GroundNumber,
-                Visit = SelectedCatch.Visit,
-                FishOne = new Carry
+                //pridani do listu
+                CatchViewModel.Catches.Add(new Catch
                 {
-                    FishName = SelectedCatch.FishOne.FishName,
-                    Lenght = SelectedCatch.FishOne.Lenght,
-                    Weight = SelectedCatch.FishOne.Weight
-                },
-                FishTwo = new Carry
-                {
-                    FishName = SelectedCatch.FishTwo.FishName,
-                    Lenght = SelectedCatch.FishTwo.Lenght,
-                    Weight = SelectedCatch.FishTwo.Weight
-                },
-            }) ;
+                    Id = SelectedCatch.Id = DatabaseManager.FindMaxId() + 1,
+                    GroundNumber = SelectedCatch.GroundNumber,
+                    Visit = SelectedCatch.Visit,
+                    FishOne = new Carry
+                    {
+                        FishName = SelectedCatch.FishOne.FishName,
+                        Lenght = SelectedCatch.FishOne.Lenght,
+                        Weight = SelectedCatch.FishOne.Weight
+                    },
+                    FishTwo = new Carry
+                    {
+                        FishName = SelectedCatch.FishTwo.FishName,
+                        Lenght = SelectedCatch.FishTwo.Lenght,
+                        Weight = SelectedCatch.FishTwo.Weight
+                    },
+                });
 
-            //Pridat do databáze
-          
-            DatabaseManager.AddNewItemToDatabase(SelectedCatch);
-           // ClearBoxes();
+                //Pridat do databáze
+
+                DatabaseManager.AddNewItemToDatabase(SelectedCatch);
+                // ClearBoxes();
+            }
+            else
+            {
+
+            }
+
         }
+        private bool CheckCatchInformation()
+        {
+            bool ok = true;
+            if (SelectedCatch.Visit > DateTime.Now)
+            {
+                MessageBox.Show("Vycházka nemohla proběhnout v budoucnu!", "Chyba");
+                ok = false;
+            }else if (isChecked)
+            {
 
+            }
+
+            return ok;
+        }
         private void ClearBoxes()
         {
             SelectedCatch.Visit = DateTime.Now;

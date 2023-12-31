@@ -37,41 +37,93 @@ namespace Rybarska_Evidence.ViewModel
         
         private bool CanAddNewMember(object obj)
         {
+            //bool can;
+            //if (!DateOfBirth())
+            //{
+            //    MessageBox.Show("Datum blbe");
+            //    can = false;
+            //}
+            //else
+            //{
+            //    can = true;
+            //}
+            //return can;
+            //MessageBox.Show("aktualni: " + DateTime.Now.ToString());
             //// Ověření, zda jsou vyplněna povinná pole a správná data
-            //bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
-            //bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
-            //bool isDateOfBirthValid = SelectedMember.DateOfBirth < DateTime.Now;
+            bool isFirstNameValid = !string.IsNullOrEmpty(SelectedMember.FirstName);
+           bool isLastNameValid = !string.IsNullOrEmpty(SelectedMember.LastName);
+            bool iiAdressValid = !string.IsNullOrEmpty(SelectedMember.Adress);
+
+            return isFirstNameValid && isLastNameValid;
+
             //bool isLicenseValid = SelectedMember.DateOfBirth > DateTime.Now;
 
             //return isFirstNameValid && isLastNameValid && isDateOfBirthValid && isLicenseValid;
-            return true;
+
         }
 
+        private bool DateOfBirth()
+        {
+            bool isDateOfBirthValid;
+            MessageBox.Show("vybrane: " + SelectedMember.DateOfBirth.ToString());
+            MessageBox.Show("aktualni: " + DateTime.Now.ToString());
 
+            if ( SelectedMember.DateOfBirth < DateTime.Now)
+            {
+                isDateOfBirthValid = true;
+            }
+            else
+            {
+                isDateOfBirthValid = false;
+            }
+            return isDateOfBirthValid;
+        }
         private void AddNewMember(object obj)
         {
 
 
-            MembersViewModel.Members.Add(new Member {
-                MemberId = SelectedMember.MemberId = DatabaseManager.FindMaxId() + 1,
-                FirstName = SelectedMember.FirstName, 
-                LastName = SelectedMember.LastName, 
-                DateOfBirth = SelectedMember.DateOfBirth,
-                MemberType = SelectedMember.MemberType,
-                Document = new Document
+            if (CheckMemberInformation())
+            {
+                MembersViewModel.Members.Add(new Member
                 {
-                    License = SelectedMember.Document.License,
-                    Sticker = SelectedMember.Document.Sticker,
-                    TypeOfPermit = SelectedMember.Document.TypeOfPermit
-                }
-            });
-            //Pridat do databáze
-           DatabaseManager.AddNewItemToDatabase(SelectedMember);
-            ClearBoxes();
+                    MemberId = SelectedMember.MemberId = DatabaseManager.FindMaxId() + 1,
+                    FirstName = SelectedMember.FirstName,
+                    LastName = SelectedMember.LastName,
+                    DateOfBirth = SelectedMember.DateOfBirth,
+                    MemberType = SelectedMember.MemberType,
+                    Document = new Document
+                    {
+                        License = SelectedMember.Document.License,
+                        Sticker = SelectedMember.Document.Sticker,
+                        TypeOfPermit = SelectedMember.Document.TypeOfPermit
+                    }
+                });
+                //Pridat do databáze
+                DatabaseManager.AddNewItemToDatabase(SelectedMember);
+                ClearBoxes();
+            }
+
         }
 
 
-       
+       private bool CheckMemberInformation()
+        {
+            bool ok = true;
+            if (SelectedMember.DateOfBirth >= DateTime.Now)
+            {
+                MessageBox.Show("Datum narození nemůže být větší nebo stejný jako aktuální datum!", "Chyba");
+                ok = false;
+            }
+            else if (SelectedMember.Document.License < DateTime.Now)
+            {
+                MessageBox.Show("Rybářský lístek je propadlý!", "Chyba");
+
+                ok = false;
+
+            }
+
+            return ok;
+        }
 
         private void ClearBoxes()
         {

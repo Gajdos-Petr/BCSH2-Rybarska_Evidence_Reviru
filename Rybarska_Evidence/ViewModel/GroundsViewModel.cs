@@ -52,6 +52,7 @@ namespace Rybarska_Evidence.ViewModel
 
         public RelayCommand ShowInfoWindowCommand { get; set; }
 
+        public RelayCommand ShowMapCommand { get; set; }
 
         private DatabaseManager<FishingGrounds> DatabaseManager { get; set; }
      
@@ -74,7 +75,25 @@ namespace Rybarska_Evidence.ViewModel
             ShowEditWindowCommand = new RelayCommand(ShowEditWindow, CanShowEditWindow);
             ShowInfoWindowCommand = new RelayCommand(ShowInfo, CanShowEditWindow);
             SearchCommand = new RelayCommand(ApplyFilter, CanApply);
+            ShowMapCommand = new RelayCommand(ShowMap, CanShowEditWindow);
         }
+
+        private  void ShowMap(object obj)
+        {
+            MessageBox.Show("Vynegerovaná trasa bude vytvořena na základně vaší adresy bydliště.", "Informace");
+            //string mapUrl = $"https://www.openstreetmap.org/?mlat={SelectedGround.GeoLocations.Latitude.ToString("0.#####", System.Globalization.CultureInfo.InvariantCulture)}&mlon={SelectedGround.GeoLocations.Longitude.ToString("0.#####", System.Globalization.CultureInfo.InvariantCulture)}#map=15/{SelectedGround.GeoLocations.ToString()}";
+            string mapUrl = $"https://www.openstreetmap.org/directions?from={LoginService.CurrentLogedMember.Adress}&to={SelectedGround.GeoLocations.ToString()}";
+        
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo
+            {
+                FileName = mapUrl,
+                UseShellExecute = true
+            });
+        }
+
+
+
+
 
         private void ShowInfo(object obj)
         {

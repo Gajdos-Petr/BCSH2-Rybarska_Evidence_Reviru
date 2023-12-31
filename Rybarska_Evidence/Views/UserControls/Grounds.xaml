@@ -10,8 +10,9 @@
 
     <Grid Background="Transparent" >
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition/>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="80*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="10">
@@ -20,15 +21,14 @@
                     <KeyBinding Key="Enter" Command="{Binding SearchCommand}" />
                 </TextBox.InputBindings>
             </TextBox>
-            <StackPanel Orientation="Horizontal" Width="655">
-                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" PŘIDAT" Command="{Binding ShowAddWindowCommand}"/>
-                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" ODEBRAT " Command="{Binding RemoveGroundCommand}" Margin="10,0,10,0"/>
-                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" UPRAVIT " Command="{Binding ShowEditWindowCommand}" Margin="0,0,10,0"/>
-                <Button Height="30" Width="120" Content=" INFO " Command="{Binding ShowInfoWindowCommand}"/>
+            <StackPanel Orientation="Horizontal" Width="655" >
+                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" PŘIDAT" Command="{Binding ShowAddWindowCommand}" FontFamily="Bahnschrift" />
+                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" ODEBRAT " Command="{Binding RemoveGroundCommand}" Margin="10,0,10,0" FontFamily="Bahnschrift" />
+                <Button Height="30" Visibility="{Binding AdminButtonsVisibility}" Width="120" Content=" UPRAVIT " Command="{Binding ShowEditWindowCommand}" Margin="0,0,10,0" FontFamily="Bahnschrift" />
 
             </StackPanel>
         </StackPanel >
-        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}" SelectedValue="{Binding SelectedGround}">
+        <ListView Grid.Row="1" Name="MemberList" Margin="10" ItemsSource="{Binding FishingGroundsColl}" SelectedValue="{Binding SelectedGround}" FontFamily="Bahnschrift" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Number}" Header="Číslo revíru" Width="80"/>
@@ -43,5 +43,11 @@
             </ListView.View>
 
         </ListView>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="10">
+            <Button Height="30" Width="120" Content=" INFO O REVÍRU" FontFamily="Bahnschrift"  Command="{Binding ShowInfoWindowCommand}"/>
+            <Button Height="30" Width="150" Content=" NAPLÁNOVAT VYCHÁZKU" FontFamily="Bahnschrift"  Command="{Binding ShowMapCommand}" Margin="5,0,0,0"/>
+
+        </StackPanel>
     </Grid>
 </UserControl>

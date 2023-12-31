@@ -13,10 +13,13 @@ namespace Rybarska_Evidence.Core
         private static LoginService instance;
         public static Member CurrentLogedMember { get; set; }
 
+        public static string Password { get; set; }
+
         public LoginService(Member loged)
         {
 
             CurrentLogedMember = loged;   
+           
         }
 
 

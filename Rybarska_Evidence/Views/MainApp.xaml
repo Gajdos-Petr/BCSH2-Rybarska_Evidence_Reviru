@@ -6,12 +6,14 @@
         xmlns:local="clr-namespace:Rybarska_Evidence.Views"
         mc:Ignorable="d"
         Title="MainApp" Height="650" Width="1200"
-        Background="Transparent" ResizeMode="NoResize"
+        Background="Transparent" 
+  ResizeMode="NoResize"
         WindowStyle="None"
-        AllowsTransparency="True">
+        AllowsTransparency="True"
+     
+        >
 
-
-    <Border Background="#FEFFFF" CornerRadius="20">
+        <Border Background="#FEFFFF" CornerRadius="20">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
@@ -36,10 +38,11 @@
                     <StackPanel Grid.Row="1" Margin="0,30,0,0"  >
                         <!--<RadioButton Content="DOMŮ" Style="{StaticResource MenuButtonRes}" IsChecked="True" Command="{Binding HomeViewCommand}"/>-->
                         <RadioButton Content="INFORMACE" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberInformationViewCommand}"/>
+                        <RadioButton Content="MÉ STATISTIKY" Style="{StaticResource MenuButtonRes}" Command="{Binding MemberStatsViewCommand}"/>
                         <RadioButton Content="REVÍRY" Style="{StaticResource MenuButtonRes}" Command="{Binding GroundsViewCommand}" />
                         <RadioButton Content="DOCHÁZKA" Style="{StaticResource MenuButtonRes}" Command="{Binding CatchesViewCommand}"/>
                         <RadioButton Visibility="{Binding AdminButtonsVisibility}" Content="ČLENOVÉ" Style="{StaticResource MenuButtonRes}"  Command="{Binding MembersViewCommand}" />
-                        <RadioButton  Visibility="{Binding AdminButtonsVisibility}" Content="STATISTIKY" Style="{StaticResource MenuButtonRes}"  Command="{Binding StatsViewCommand}" />
+                        <RadioButton  Visibility="{Binding AdminButtonsVisibility}" Content="STATISTIKY REVÍRŮ" Style="{StaticResource MenuButtonRes}"  Command="{Binding StatsViewCommand}" />
 
                         
                     </StackPanel>
@@ -53,12 +56,28 @@
                     <RowDefinition Height="70*"/>
                 </Grid.RowDefinitions>
                 <Border >
-                <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button Width="80" Content="MIN"/>
-                    <Button Width="80" Content="MAX"/>
-                    <Button Name="btnCloseMainWindow" Width="80" Content="CLOSE" Click="btnCloseMainWindow_Click"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="20*"/>
+                            <ColumnDefinition Width="80*"/>
+                        </Grid.ColumnDefinitions>
 
-                </StackPanel>
+
+                        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Left">
+                            <Button Name="btnCloseMainWindow" Width="80" Content="CLOSE" Click="btnCloseMainWindow_Click" Margin="20,5,0,0"/>
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Label  Width="Auto" Content="AKTUÁLNÍ DOBA LOVU JE:" VerticalAlignment="Center" FontWeight="Bold" FontSize="14"/>
+                            <Label  Width="Auto" Content="{Binding CurrentFishTime}" VerticalAlignment="Center" Margin="0,0,20,0" FontWeight="Bold" FontSize="14"/>
+
+                        </StackPanel>
+                    </Grid>
+       
+                   
                 </Border>
                     <ContentControl Grid.Row="1" Margin="20" Content="{Binding CurrentView}" />
 

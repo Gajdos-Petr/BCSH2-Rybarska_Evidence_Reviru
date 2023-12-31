@@ -42,9 +42,9 @@
                             <RowDefinition Height="30"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Text="CELKOVÁ ODNENESÁ HMOTNOST [KG]" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
+                        <TextBlock Text="CELKOVÁ ODNESENÁ HMOTNOST [KG]" Foreground="White" FontFamily="Bahnschrift" FontSize="14" Margin="5"/>
                         <StackPanel Grid.Row="1"  Margin="10" VerticalAlignment="Center" HorizontalAlignment="Center">
-                            <TextBlock Text="{Binding Stat.TotalWeght}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
+                            <TextBlock Text="{Binding Stat.TotalWeight}" FontFamily="Bahnschrift" Foreground="White" Margin="0,0,0,10" FontSize="36" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </Grid>
 
